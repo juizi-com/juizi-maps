@@ -1,0 +1,739 @@
+// Map block. Colours follow the block's pin colour (--jmap-accent, set on
+// .jmap by the view) and the page's own text colour and fonts, so the block
+// fits plain Volto, VLT and other themes without its own palette.
+
+.jmap {
+  --jmap-accent: #1f6f8b;
+  --jmap-accent-dark: color-mix(in srgb, var(--jmap-accent) 70%, #000);
+  --jmap-ink: #1d232b;
+  --jmap-muted: #5b6670;
+  --jmap-line: #dfe3e6;
+  --jmap-wash: color-mix(in srgb, var(--jmap-accent) 8%, #fff);
+  --jmap-radius: 10px;
+  --jmap-shadow: 0 6px 24px rgb(0 0 0 / 16%);
+
+  position: relative;
+  container: jmap / inline-size;
+}
+
+.jmap-sr-only {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+}
+
+.jmap__map {
+  overflow: hidden;
+  border-radius: var(--jmap-radius);
+  background: var(--jmap-wash);
+}
+
+.jmap__canvas {
+  width: 100%;
+
+  .maplibregl-ctrl-group {
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+  }
+}
+
+.jmap__canvas--waiting {
+  display: grid;
+  place-items: center;
+}
+
+.jmap__failed {
+  max-width: 32ch;
+  margin: 0;
+  color: var(--jmap-muted);
+  text-align: center;
+}
+
+// ---------- Key ----------
+
+.jmap__legend {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  color: var(--jmap-muted);
+  font-size: 14px;
+  gap: 6px;
+}
+
+.jmap__legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+
+.jmap__legend-title {
+  color: var(--jmap-ink);
+  font-weight: 600;
+}
+
+.jmap__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jmap__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 80%),
+    0 0 0 3px rgb(0 0 0 / 15%);
+}
+
+.jmap__ramp {
+  width: 160px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+// ---------- Place list ----------
+
+.jmap__list {
+  margin-top: 24px;
+}
+
+.jmap__list-title {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.jmap__places {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  gap: 8px 24px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  list-style: none;
+
+  > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--jmap-line);
+    gap: 12px;
+  }
+
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+
+    &:hover {
+      color: var(--jmap-accent-dark);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--jmap-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  .jmap__place-name {
+    font-weight: 600;
+  }
+
+  .jmap__n {
+    color: var(--jmap-muted);
+    white-space: nowrap;
+  }
+}
+
+// ---------- Pins (HTML markers on the map) ----------
+
+.jmap-pinwrap {
+  line-height: 0;
+}
+
+.jmap-pin {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+
+  &:focus-visible {
+    border-radius: 50%;
+    outline: 3px solid #1d232b;
+    outline-offset: 3px;
+  }
+}
+
+.jmap-pin__label {
+  color: #fff;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.jmap-pin--pin {
+  svg {
+    display: block;
+    filter: drop-shadow(0 2px 3px rgb(0 0 0 / 30%));
+    transform-origin: 50% 100%;
+    transition: transform 0.15s;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+
+  .jmap-pin__label {
+    position: absolute;
+    top: 9px;
+    left: 0;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+.jmap-pin--dot {
+  display: grid;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+  place-items: center;
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: scale(1.12);
+  }
+}
+
+.jmap-pin--badge {
+  padding: 6px 11px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+  transition: transform 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .jmap-pin__unit {
+    margin-left: 4px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+}
+
+.jmap-pin--group {
+  display: grid;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 6px rgb(255 255 255 / 55%),
+    0 2px 8px rgb(0 0 0 / 30%);
+  place-items: center;
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  .jmap-pin__label {
+    font-size: 14px;
+  }
+}
+
+.jmap-pin__stack {
+  display: grid;
+  justify-items: center;
+}
+
+.jmap-pin__sub {
+  display: block;
+  margin-top: 2px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.85;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jmap-pin,
+  .jmap-pin svg {
+    transition: none !important;
+  }
+}
+
+// ---------- Pop-ups ----------
+
+.jmap-popup {
+  .maplibregl-popup-content {
+    overflow: hidden;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 16%);
+    color: #1d232b;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .maplibregl-popup-close-button {
+    top: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: inherit;
+    font-size: 22px;
+    line-height: 1;
+    opacity: 0.7;
+
+    &:hover {
+      background: rgb(0 0 0 / 8%);
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentcolor;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.jmap-pop {
+  a:focus-visible {
+    border-radius: 4px;
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+}
+
+.jmap-pop__img {
+  display: block;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.jmap-pop__body {
+  padding: 16px 18px 18px;
+}
+
+.jmap-pop__place {
+  margin: 0 28px 4px 0;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.jmap-pop__count {
+  margin: 0 0 10px;
+  color: #5b6670;
+
+  strong {
+    margin-right: 6px;
+    color: var(--jmap-accent);
+    font-size: 1.6rem;
+    line-height: 1;
+    vertical-align: -2px;
+  }
+}
+
+.jmap-pop__summary {
+  margin: 0 0 10px;
+}
+
+.jmap-pop__figures {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 0 12px;
+  gap: 6px;
+  list-style: none;
+
+  li {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #eef2f3;
+    font-size: 13px;
+  }
+}
+
+.jmap-pop__items {
+  padding: 0;
+  margin: 0 0 12px;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding: 5px 0 5px 14px;
+    border-top: 1px solid #dfe3e6;
+    font-size: 14px;
+
+    &::before {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentcolor;
+      content: '';
+      opacity: 0.6;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.is-expanded {
+    max-height: 220px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+.jmap-pop__more::before {
+  display: none;
+}
+
+.jmap-pop__showall {
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+}
+
+.jmap-pop__btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--jmap-accent);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.jmap-pop__places {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 1px solid #dfe3e6;
+    font-size: 14px;
+    gap: 12px;
+  }
+}
+
+.jmap-pop__contact {
+  display: grid;
+  padding-top: 10px;
+  border-top: 1px solid #dfe3e6;
+  margin: 0 0 12px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.jmap-pop__directions,
+.jmap-office__directions {
+  font-size: 14px;
+  font-weight: 600;
+
+  &::after {
+    content: ' ↗';
+  }
+}
+
+.jmap-pop__addr {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+// Card with a coloured top
+.jmap-popup--band {
+  .jmap-pop__head {
+    padding: 14px 18px 12px;
+
+    .jmap-pop__place {
+      margin-bottom: 2px;
+      color: inherit;
+    }
+
+    .jmap-pop__count {
+      margin: 0;
+      color: inherit;
+      opacity: 0.9;
+
+      strong {
+        color: inherit;
+      }
+    }
+  }
+
+  .maplibregl-popup-close-button {
+    color: var(--jmap-band-ink, #fff);
+  }
+}
+
+// Small label
+.jmap-popup--compact {
+  .maplibregl-popup-content {
+    border-radius: 8px;
+    background: #1d232b;
+    color: #fff;
+  }
+
+  .jmap-pop__body {
+    padding: 10px 14px;
+  }
+
+  .jmap-pop__place {
+    margin: 0 24px 0 0;
+    font-size: 0.95rem;
+  }
+
+  .jmap-pop__count {
+    margin: 2px 0 0;
+    color: rgb(255 255 255 / 80%);
+    font-size: 14px;
+
+    strong {
+      margin-right: 4px;
+      color: #fff;
+      font-size: 1rem;
+    }
+  }
+
+  .jmap-pop__link {
+    display: inline-block;
+    margin-top: 6px;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  &.maplibregl-popup-anchor-top .maplibregl-popup-tip {
+    border-bottom-color: #1d232b;
+  }
+
+  &.maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+    border-top-color: #1d232b;
+  }
+
+  &.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+    border-right-color: #1d232b;
+  }
+
+  &.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+    border-left-color: #1d232b;
+  }
+}
+
+// ---------- Places with contact details ----------
+
+.jmap__offices {
+  display: grid;
+  margin-top: 16px;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.jmap-office {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--jmap-line);
+  border-radius: var(--jmap-radius);
+  gap: 10px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+
+  &.is-active {
+    border-color: var(--jmap-accent);
+    box-shadow: 0 0 0 1px var(--jmap-accent);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--jmap-accent);
+    outline-offset: 2px;
+  }
+}
+
+.jmap-office__img {
+  width: calc(100% + 40px);
+  height: 140px;
+  border-radius: var(--jmap-radius) var(--jmap-radius) 0 0;
+  margin: -18px -20px 4px;
+  object-fit: cover;
+}
+
+.jmap-office__name {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.jmap-office__summary,
+.jmap-contact__address {
+  margin: 0;
+}
+
+.jmap-contact__rows {
+  display: grid;
+  margin: 0;
+  gap: 4px 12px;
+  grid-template-columns: auto 1fr;
+
+  dt {
+    padding-top: 1px;
+    color: var(--jmap-muted, #5b6670);
+    font-size: 14px;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.jmap-contact__other {
+  color: var(--jmap-muted);
+  font-size: 15px;
+
+  p {
+    margin: 0 0 6px;
+  }
+}
+
+.jmap-office__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 4px;
+  margin-top: auto;
+  gap: 10px 16px;
+
+  .jmap-pop__btn {
+    background: var(--jmap-accent);
+  }
+}
+
+.jmap-office__show {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--jmap-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+// One place: the details sit beside the map.
+.jmap--single .jmap__main {
+  display: grid;
+  align-items: stretch;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+
+  .jmap__offices {
+    margin-top: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .jmap-office {
+    padding: 4px 0;
+    border: 0;
+  }
+}
+
+// ---------- Narrow spaces and phones ----------
+
+@container jmap (max-width: 600px) {
+  .jmap__canvas,
+  .jmap__map {
+    max-height: 360px;
+  }
+
+  .jmap--single .jmap__main {
+    grid-template-columns: 1fr;
+  }
+
+  // "Hide the map on phones": the list or the contact cards carry it.
+  .jmap--nomap-phone {
+    .jmap__map,
+    .jmap__legend,
+    .jmap-office__show {
+      display: none;
+    }
+
+    .jmap__list {
+      margin-top: 0;
+    }
+
+    .jmap__list.jmap-sr-only {
+      position: static !important;
+      overflow: visible !important;
+      width: auto !important;
+      height: auto !important;
+      clip: auto !important;
+      white-space: normal !important;
+    }
+
+    .jmap__offices {
+      margin-top: 0;
+    }
+  }
+}
+
+// Map failed: the list must be readable.
+.jmap--failed .jmap__map {
+  min-height: 0 !important;
+}

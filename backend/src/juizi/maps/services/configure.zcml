@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="juizi.maps"
+    >
+
+  <!-- Only on sites where juizi.maps is installed (browser layer). -->
+
+  <plone:service
+      method="GET"
+      factory=".settings.SettingsGet"
+      for="plone.base.interfaces.IPloneSiteRoot"
+      permission="zope2.View"
+      layer="..interfaces.IBrowserLayer"
+      name="@juizi-maps-settings"
+      />
+
+  <plone:service
+      method="PATCH"
+      factory=".settings.SettingsPatch"
+      for="plone.base.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      layer="..interfaces.IBrowserLayer"
+      name="@juizi-maps-settings"
+      />
+
+</configure>

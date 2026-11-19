@@ -1,0 +1,1292 @@
+[
+ {
+  "id": "projects-by-country",
+  "title": "Projects by country",
+  "description": "JET /work: 20 countries, pins with totals.",
+  "intro": "We present a snapshot of our project reach, showing areas where we work and where we collaborate.",
+  "block": {
+   "mapLook": "branded",
+   "mapTone": "tinted",
+   "labels": "nostreets",
+   "height": "medium",
+   "cluster": true,
+   "groupColours": "shades",
+   "highlight": true,
+   "popupStyle": "card",
+   "itemLimit": "5",
+   "maxZoom": "10",
+   "listMode": "visible",
+   "mobileMap": "show",
+   "regionSet": "countries",
+   "regionPins": false,
+   "displayMode": "totals",
+   "pinShape": "badge",
+   "places": [
+    {
+     "@id": "w-0",
+     "place": "South Africa",
+     "title": "South Africa",
+     "location": {
+      "lat": -25.73134,
+      "lng": 28.21837
+     },
+     "number": "15",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w0i-0",
+       "title": "AASA"
+      },
+      {
+       "@id": "w0i-1",
+       "title": "Mindspark"
+      },
+      {
+       "@id": "w0i-2",
+       "title": "TICZA"
+      },
+      {
+       "@id": "w0i-3",
+       "title": "Bridging the Gap"
+      },
+      {
+       "@id": "w0i-4",
+       "title": "Save the Children"
+      },
+      {
+       "@id": "w0i-5",
+       "title": "Parental Involvement"
+      },
+      {
+       "@id": "w0i-6",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "w0i-7",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "w0i-8",
+       "title": "Edten"
+      },
+      {
+       "@id": "w0i-9",
+       "title": "Build Education Back Better"
+      },
+      {
+       "@id": "w0i-10",
+       "title": "Teacher Choices in Action"
+      },
+      {
+       "@id": "w0i-11",
+       "title": "Grade R Mathematics and Language Improvement Programme"
+      },
+      {
+       "@id": "w0i-12",
+       "title": "Jala Peo \"Plant a Seed\""
+      },
+      {
+       "@id": "w0i-13",
+       "title": "PSET Cloud"
+      },
+      {
+       "@id": "w0i-14",
+       "title": "VVOB EGRI"
+      }
+     ]
+    },
+    {
+     "@id": "w-1",
+     "place": "Namibia",
+     "title": "Namibia",
+     "location": {
+      "lat": -22.56088,
+      "lng": 17.06575
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w1i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "w1i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-2",
+     "place": "Lesotho",
+     "title": "Lesotho",
+     "location": {
+      "lat": -29.1511,
+      "lng": 27.7425
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w2i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "w2i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-3",
+     "place": "Mauritius",
+     "title": "Mauritius",
+     "location": {
+      "lat": -20.1608912,
+      "lng": 57.5012222
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w3i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "w3i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-4",
+     "place": "Estonia",
+     "title": "Estonia",
+     "location": {
+      "lat": 59.436962,
+      "lng": 24.753574
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w4i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "w-5",
+     "place": "Belgium",
+     "title": "Belgium",
+     "location": {
+      "lat": 50.8467,
+      "lng": 4.3525
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w5i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "w-6",
+     "place": "Ireland",
+     "title": "Ireland",
+     "location": {
+      "lat": 53.35014,
+      "lng": -6.266155
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w6i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "w-7",
+     "place": "Mozambique",
+     "title": "Mozambique",
+     "location": {
+      "lat": -25.953724,
+      "lng": 32.588711
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w7i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "w7i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-8",
+     "place": "Malawi",
+     "title": "Malawi",
+     "location": {
+      "lat": -13.9626121,
+      "lng": 33.7741195
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w8i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "w8i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-9",
+     "place": "Zambia",
+     "title": "Zambia",
+     "location": {
+      "lat": -15.416667,
+      "lng": 28.283333
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w9i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "w9i-1",
+       "title": "International Labour Organization"
+      },
+      {
+       "@id": "w9i-2",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-10",
+     "place": "Ethiopia",
+     "title": "Ethiopia",
+     "location": {
+      "lat": 9.005401,
+      "lng": 38.763611
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w10i-0",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "w10i-1",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "w10i-2",
+       "title": "International Labour Organization"
+      }
+     ]
+    },
+    {
+     "@id": "w-11",
+     "place": "Ghana",
+     "title": "Ghana",
+     "location": {
+      "lat": 5.614818,
+      "lng": -0.205874
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w11i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "w11i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-12",
+     "place": "Kenya",
+     "title": "Kenya",
+     "location": {
+      "lat": -1.286389,
+      "lng": 36.817223
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w12i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "w12i-1",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "w12i-2",
+       "title": "International Labour Organization"
+      }
+     ]
+    },
+    {
+     "@id": "w-13",
+     "place": "Côte d'Ivoire",
+     "title": "Côte d'Ivoire",
+     "location": {
+      "lat": 5.345317,
+      "lng": -4.024429
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w13i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "w13i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-14",
+     "place": "Rwanda",
+     "title": "Rwanda",
+     "location": {
+      "lat": -1.94995,
+      "lng": 30.05885
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w14i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "w14i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-15",
+     "place": "France",
+     "title": "France",
+     "location": {
+      "lat": 48.864716,
+      "lng": 2.349014
+     },
+     "number": "5",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w15i-0",
+       "title": "International Standard Classification of Teacher Training Programmes (ISCED-T 2021)"
+      },
+      {
+       "@id": "w15i-1",
+       "title": "UNESCO: K–12 AI curricula: a mapping of government-endorsed AI curricula"
+      },
+      {
+       "@id": "w15i-2",
+       "title": "AI competency framework for school students and teachers"
+      },
+      {
+       "@id": "w15i-3",
+       "title": "Enhancing digital transformation through TVET in developing countries (DX/T)"
+      },
+      {
+       "@id": "w15i-4",
+       "title": "Guiding framework on technology-enabled open schools"
+      }
+     ]
+    },
+    {
+     "@id": "w-16",
+     "place": "Eswatini",
+     "title": "Eswatini",
+     "location": {
+      "lat": -26.31667,
+      "lng": 31.13333
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w16i-0",
+       "title": "Adapting the ELOM 4-5 and LEGO Engage tools for the Grade 0 evaluation"
+      }
+     ]
+    },
+    {
+     "@id": "w-17",
+     "place": "Germany",
+     "title": "Germany",
+     "location": {
+      "lat": 52.520008,
+      "lng": 13.404954
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w17i-0",
+       "title": "UNESCO-UNEVOC strategy for TVET 2022–2029"
+      }
+     ]
+    },
+    {
+     "@id": "w-18",
+     "place": "Seychelles",
+     "title": "Seychelles",
+     "location": {
+      "lat": -7.018792,
+      "lng": 51.24213
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "w18i-0",
+       "title": "Indicator review for tertiary education institutions"
+      },
+      {
+       "@id": "w18i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "w-19",
+     "place": "Egypt",
+     "title": "Egypt",
+     "location": {
+      "lat": 30.033333,
+      "lng": 31.233334
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "w19i-0",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "schools-by-town",
+  "title": "Schools by town",
+  "description": "Anglo American programme: 7 towns with primary and high school figures.",
+  "intro": "Schools taking part in Phase 2 of the programme.",
+  "block": {
+   "mapLook": "branded",
+   "mapTone": "tinted",
+   "labels": "nostreets",
+   "height": "medium",
+   "cluster": true,
+   "groupColours": "site",
+   "highlight": true,
+   "popupStyle": "card",
+   "itemLimit": "5",
+   "maxZoom": "10",
+   "listMode": "visible",
+   "mobileMap": "show",
+   "regionSet": "countries",
+   "regionPins": false,
+   "displayMode": "totals",
+   "pinShape": "pin",
+   "places": [
+    {
+     "@id": "s-0",
+     "place": "Kuruman",
+     "title": "Kuruman",
+     "location": {
+      "lat": -27.4629,
+      "lng": 23.436
+     },
+     "number": "16",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s0f-0",
+       "label": "Primary schools",
+       "value": "11"
+      },
+      {
+       "@id": "s0f-1",
+       "label": "High schools",
+       "value": "5"
+      }
+     ]
+    },
+    {
+     "@id": "s-1",
+     "place": "Kimberley",
+     "title": "Kimberley",
+     "location": {
+      "lat": -28.7435,
+      "lng": 24.7626
+     },
+     "number": "4",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s1f-0",
+       "label": "Primary schools",
+       "value": "2"
+      },
+      {
+       "@id": "s1f-1",
+       "label": "High schools",
+       "value": "2"
+      }
+     ]
+    },
+    {
+     "@id": "s-2",
+     "place": "Ga-Mampuru",
+     "title": "Ga-Mampuru",
+     "location": {
+      "lat": -24.8431,
+      "lng": 30.0636
+     },
+     "number": "7",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s2f-0",
+       "label": "Primary schools",
+       "value": "4"
+      },
+      {
+       "@id": "s2f-1",
+       "label": "High schools",
+       "value": "3"
+      }
+     ]
+    },
+    {
+     "@id": "s-3",
+     "place": "Rustenburg",
+     "title": "Rustenburg",
+     "location": {
+      "lat": -25.6682,
+      "lng": 27.2386
+     },
+     "number": "20",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s3f-0",
+       "label": "Primary schools",
+       "value": "13"
+      },
+      {
+       "@id": "s3f-1",
+       "label": "High schools",
+       "value": "7"
+      }
+     ]
+    },
+    {
+     "@id": "s-4",
+     "place": "Mokopane",
+     "title": "Mokopane",
+     "location": {
+      "lat": -24.1809,
+      "lng": 29.0139
+     },
+     "number": "10",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s4f-0",
+       "label": "Primary schools",
+       "value": "6"
+      },
+      {
+       "@id": "s4f-1",
+       "label": "High schools",
+       "value": "4"
+      }
+     ]
+    },
+    {
+     "@id": "s-5",
+     "place": "Polokwane",
+     "title": "Polokwane",
+     "location": {
+      "lat": -23.8981,
+      "lng": 29.45
+     },
+     "number": "15",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s5f-0",
+       "label": "Primary schools",
+       "value": "8"
+      },
+      {
+       "@id": "s5f-1",
+       "label": "High schools",
+       "value": "7"
+      }
+     ]
+    },
+    {
+     "@id": "s-6",
+     "place": "Musina",
+     "title": "Musina",
+     "location": {
+      "lat": -22.3602,
+      "lng": 30.0482
+     },
+     "number": "13",
+     "numberLabel": "schools",
+     "figures": [
+      {
+       "@id": "s6f-0",
+       "label": "Primary schools",
+       "value": "9"
+      },
+      {
+       "@id": "s6f-1",
+       "label": "High schools",
+       "value": "4"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "shaded-countries",
+  "title": "Shaded countries",
+  "description": "The JET countries as shaded regions.",
+  "intro": "Countries coloured by their number of projects.",
+  "block": {
+   "mapLook": "outline",
+   "mapTone": "tinted",
+   "labels": "nostreets",
+   "height": "medium",
+   "cluster": true,
+   "groupColours": "shades",
+   "highlight": true,
+   "popupStyle": "card",
+   "itemLimit": "5",
+   "maxZoom": "10",
+   "listMode": "visible",
+   "mobileMap": "show",
+   "regionSet": "countries",
+   "regionPins": false,
+   "displayMode": "regions",
+   "places": [
+    {
+     "@id": "r-0",
+     "place": "South Africa",
+     "title": "South Africa",
+     "location": {
+      "lat": -25.73134,
+      "lng": 28.21837
+     },
+     "number": "15",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r0i-0",
+       "title": "AASA"
+      },
+      {
+       "@id": "r0i-1",
+       "title": "Mindspark"
+      },
+      {
+       "@id": "r0i-2",
+       "title": "TICZA"
+      },
+      {
+       "@id": "r0i-3",
+       "title": "Bridging the Gap"
+      },
+      {
+       "@id": "r0i-4",
+       "title": "Save the Children"
+      },
+      {
+       "@id": "r0i-5",
+       "title": "Parental Involvement"
+      },
+      {
+       "@id": "r0i-6",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "r0i-7",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "r0i-8",
+       "title": "Edten"
+      },
+      {
+       "@id": "r0i-9",
+       "title": "Build Education Back Better"
+      },
+      {
+       "@id": "r0i-10",
+       "title": "Teacher Choices in Action"
+      },
+      {
+       "@id": "r0i-11",
+       "title": "Grade R Mathematics and Language Improvement Programme"
+      },
+      {
+       "@id": "r0i-12",
+       "title": "Jala Peo \"Plant a Seed\""
+      },
+      {
+       "@id": "r0i-13",
+       "title": "PSET Cloud"
+      },
+      {
+       "@id": "r0i-14",
+       "title": "VVOB EGRI"
+      }
+     ]
+    },
+    {
+     "@id": "r-1",
+     "place": "Namibia",
+     "title": "Namibia",
+     "location": {
+      "lat": -22.56088,
+      "lng": 17.06575
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r1i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "r1i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-2",
+     "place": "Lesotho",
+     "title": "Lesotho",
+     "location": {
+      "lat": -29.1511,
+      "lng": 27.7425
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r2i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "r2i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-3",
+     "place": "Mauritius",
+     "title": "Mauritius",
+     "location": {
+      "lat": -20.1608912,
+      "lng": 57.5012222
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r3i-0",
+       "title": "PoMiSA"
+      },
+      {
+       "@id": "r3i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-4",
+     "place": "Estonia",
+     "title": "Estonia",
+     "location": {
+      "lat": 59.436962,
+      "lng": 24.753574
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r4i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "r-5",
+     "place": "Belgium",
+     "title": "Belgium",
+     "location": {
+      "lat": 50.8467,
+      "lng": 4.3525
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r5i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "r-6",
+     "place": "Ireland",
+     "title": "Ireland",
+     "location": {
+      "lat": 53.35014,
+      "lng": -6.266155
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r6i-0",
+       "title": "PoMiSA"
+      }
+     ]
+    },
+    {
+     "@id": "r-7",
+     "place": "Mozambique",
+     "title": "Mozambique",
+     "location": {
+      "lat": -25.953724,
+      "lng": 32.588711
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r7i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "r7i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-8",
+     "place": "Malawi",
+     "title": "Malawi",
+     "location": {
+      "lat": -13.9626121,
+      "lng": 33.7741195
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r8i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "r8i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-9",
+     "place": "Zambia",
+     "title": "Zambia",
+     "location": {
+      "lat": -15.416667,
+      "lng": 28.283333
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r9i-0",
+       "title": "Commonwealth of Learning (COL) cost-benefit analysis"
+      },
+      {
+       "@id": "r9i-1",
+       "title": "International Labour Organization"
+      },
+      {
+       "@id": "r9i-2",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-10",
+     "place": "Ethiopia",
+     "title": "Ethiopia",
+     "location": {
+      "lat": 9.005401,
+      "lng": 38.763611
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r10i-0",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "r10i-1",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "r10i-2",
+       "title": "International Labour Organization"
+      }
+     ]
+    },
+    {
+     "@id": "r-11",
+     "place": "Ghana",
+     "title": "Ghana",
+     "location": {
+      "lat": 5.614818,
+      "lng": -0.205874
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r11i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "r11i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-12",
+     "place": "Kenya",
+     "title": "Kenya",
+     "location": {
+      "lat": -1.286389,
+      "lng": 36.817223
+     },
+     "number": "3",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r12i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "r12i-1",
+       "title": "African Continental Qualifications Framework"
+      },
+      {
+       "@id": "r12i-2",
+       "title": "International Labour Organization"
+      }
+     ]
+    },
+    {
+     "@id": "r-13",
+     "place": "Côte d'Ivoire",
+     "title": "Côte d'Ivoire",
+     "location": {
+      "lat": 5.345317,
+      "lng": -4.024429
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r13i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "r13i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-14",
+     "place": "Rwanda",
+     "title": "Rwanda",
+     "location": {
+      "lat": -1.94995,
+      "lng": 30.05885
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r14i-0",
+       "title": "Barriers to effective labour mobility in the African leather industry"
+      },
+      {
+       "@id": "r14i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-15",
+     "place": "France",
+     "title": "France",
+     "location": {
+      "lat": 48.864716,
+      "lng": 2.349014
+     },
+     "number": "5",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r15i-0",
+       "title": "International Standard Classification of Teacher Training Programmes (ISCED-T 2021)"
+      },
+      {
+       "@id": "r15i-1",
+       "title": "UNESCO: K–12 AI curricula: a mapping of government-endorsed AI curricula"
+      },
+      {
+       "@id": "r15i-2",
+       "title": "AI competency framework for school students and teachers"
+      },
+      {
+       "@id": "r15i-3",
+       "title": "Enhancing digital transformation through TVET in developing countries (DX/T)"
+      },
+      {
+       "@id": "r15i-4",
+       "title": "Guiding framework on technology-enabled open schools"
+      }
+     ]
+    },
+    {
+     "@id": "r-16",
+     "place": "Eswatini",
+     "title": "Eswatini",
+     "location": {
+      "lat": -26.31667,
+      "lng": 31.13333
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r16i-0",
+       "title": "Adapting the ELOM 4-5 and LEGO Engage tools for the Grade 0 evaluation"
+      }
+     ]
+    },
+    {
+     "@id": "r-17",
+     "place": "Germany",
+     "title": "Germany",
+     "location": {
+      "lat": 52.520008,
+      "lng": 13.404954
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r17i-0",
+       "title": "UNESCO-UNEVOC strategy for TVET 2022–2029"
+      }
+     ]
+    },
+    {
+     "@id": "r-18",
+     "place": "Seychelles",
+     "title": "Seychelles",
+     "location": {
+      "lat": -7.018792,
+      "lng": 51.24213
+     },
+     "number": "2",
+     "numberLabel": "projects",
+     "items": [
+      {
+       "@id": "r18i-0",
+       "title": "Indicator review for tertiary education institutions"
+      },
+      {
+       "@id": "r18i-1",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    },
+    {
+     "@id": "r-19",
+     "place": "Egypt",
+     "title": "Egypt",
+     "location": {
+      "lat": 30.033333,
+      "lng": 31.233334
+     },
+     "number": "1",
+     "numberLabel": "project",
+     "items": [
+      {
+       "@id": "r19i-0",
+       "title": "African Continental Qualifications Framework"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "contact-offices",
+  "title": "Contact: three offices",
+  "description": "A made-up organisation with three offices (placeholder details).",
+  "intro": "Visit or get in touch with one of our offices.",
+  "block": {
+   "mapLook": "branded",
+   "mapTone": "light",
+   "labels": "all",
+   "height": "medium",
+   "cluster": false,
+   "groupColours": "shades",
+   "highlight": false,
+   "popupStyle": "compact",
+   "itemLimit": "5",
+   "maxZoom": "18",
+   "listMode": "visible",
+   "mobileMap": "show",
+   "regionSet": "countries",
+   "regionPins": false,
+   "displayMode": "contact",
+   "pinShape": "pin",
+   "places": [
+    {
+     "@id": "o-0",
+     "place": "Johannesburg (head office)",
+     "title": "Johannesburg (head office)",
+     "location": {
+      "lat": -26.1929,
+      "lng": 28.0337
+     },
+     "contactAddress": "Floor 3, 12 Example Road\nBraamfontein\nJohannesburg 2001",
+     "contactPhone": "+27 11 000 0000",
+     "contactEmail": "info@example.org",
+     "contactHours": "Monday to Friday, 8:00 to 16:30",
+     "contactOther": "Visitor parking is in the basement. Please sign in at reception."
+    },
+    {
+     "@id": "o-1",
+     "place": "Cape Town",
+     "title": "Cape Town",
+     "location": {
+      "lat": -33.9221,
+      "lng": 18.4231
+     },
+     "contactAddress": "Unit 5, 40 Sample Street\nCity Centre\nCape Town 8001",
+     "contactPhone": "+27 21 000 0000",
+     "contactEmail": "capetown@example.org",
+     "contactHours": "Monday to Friday, 8:30 to 16:00",
+     "contactOther": ""
+    },
+    {
+     "@id": "o-2",
+     "place": "Durban",
+     "title": "Durban",
+     "location": {
+      "lat": -29.7254,
+      "lng": 31.0844
+     },
+     "contactAddress": "2 Placeholder Crescent\nUmhlanga Ridge\nDurban 4319",
+     "contactPhone": "+27 31 000 0000",
+     "contactEmail": "durban@example.org",
+     "contactHours": "Tuesday to Thursday, 9:00 to 15:00",
+     "contactOther": "Visits by appointment only."
+    }
+   ]
+  }
+ },
+ {
+  "id": "contact-one-office",
+  "title": "Contact: one office",
+  "description": "The same organisation with one office: details beside the map.",
+  "intro": "Visit or get in touch with our office.",
+  "block": {
+   "mapLook": "branded",
+   "mapTone": "light",
+   "labels": "all",
+   "height": "medium",
+   "cluster": false,
+   "groupColours": "shades",
+   "highlight": false,
+   "popupStyle": "compact",
+   "itemLimit": "5",
+   "maxZoom": "18",
+   "listMode": "visible",
+   "mobileMap": "show",
+   "regionSet": "countries",
+   "regionPins": false,
+   "displayMode": "contact",
+   "pinShape": "pin",
+   "places": [
+    {
+     "@id": "h-0",
+     "place": "Head office",
+     "title": "Head office",
+     "location": {
+      "lat": -26.1929,
+      "lng": 28.0337
+     },
+     "contactAddress": "Floor 3, 12 Example Road\nBraamfontein\nJohannesburg 2001",
+     "contactPhone": "+27 11 000 0000",
+     "contactEmail": "info@example.org",
+     "contactHours": "Monday to Friday, 8:00 to 16:30",
+     "contactOther": "Visitor parking is in the basement. Please sign in at reception."
+    }
+   ]
+  }
+ }
+]

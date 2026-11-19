@@ -1,0 +1,7 @@
+# Configuration for https://github.com/plone/cookiecutter-zope-instance
+
+default_context:
+    initial_user_password: 'admin'
+    zcml_package_includes: 'juizi.maps'
+    # Its own port, so it runs beside the other local backends (p24 uses 8080).
+    wsgi_listen: localhost:8098

@@ -1,0 +1,38 @@
+/* Edit-only hints inside a block's frame (see EditHint.jsx). */
+.block__edit-hint {
+  margin: 0.5rem 0;
+  color: var(--grey, #888);
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/* On a coloured background the hint follows the block's text colour. */
+.bg-dark .block__edit-hint,
+.tone-light .block__edit-hint {
+  color: inherit;
+  opacity: 0.8;
+}
+
+/* A warning is a box of its own: always dark text on a light background,
+   whatever the block's colours. Fixed colours, not site variables (a site can
+   name a colour "dark"), and selectors strong enough to beat the rules that
+   make a block's text follow its background (`.bg-dark .block__edit-hint`
+   above, `.juizi-block p`): with those, a block with light text gave the
+   warning light text on its light background. */
+.block__edit-hint.block__edit-hint--warning,
+.bg-dark .block__edit-hint.block__edit-hint--warning,
+.tone-light .block__edit-hint.block__edit-hint--warning {
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid #111;
+  background: #f9f9f9;
+  color: #111;
+  font-style: normal;
+  opacity: 1;
+}
+
+/* Unfinished items (a button without a link, a slide without a picture):
+   shown to editors only, dashed so they read as "not done yet". */
+.block__unfinished {
+  border: 2px dashed var(--grey, #888) !important;
+  opacity: 0.75;
+}

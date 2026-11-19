@@ -1,0 +1,399 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"POT-Creation-Date: 2026-10-01T05:47:43.869Z\n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#. Default: "AI account"
+#: components/Blocks/Chatbot/messages
+msgid "maps-account"
+msgstr ""
+
+#. Default: "The AI service that answers visitors' questions. Your site administrator adds these under Site Setup > AI Chatbot."
+#: components/Blocks/Chatbot/messages
+msgid "maps-account-description"
+msgstr ""
+
+#. Default: "How it answers"
+#: components/Blocks/Chatbot/messages
+msgid "maps-answers"
+msgstr ""
+
+#. Default: "AI chat bot"
+#: components/Blocks/Chatbot/messages
+msgid "maps-block-title"
+msgstr ""
+
+#. Default: "Choose an AI account in the sidebar to get started. If the list is empty, ask your site administrator to add one under Site Setup > AI Chatbot."
+#: components/Blocks/Chatbot/messages
+msgid "maps-choose-account"
+msgstr ""
+
+#. Default: "AI account"
+#: components/Blocks/Chatbot/messages
+msgid "maps-connection"
+msgstr ""
+
+#. Default: "Conversation"
+#: components/Blocks/Chatbot/messages
+msgid "maps-conversation"
+msgstr ""
+
+#. Default: "The last question failed: {message}"
+#: components/Blocks/Chatbot/messages
+msgid "maps-editor-error"
+msgstr ""
+
+#. Default: "Instructions for the chat bot"
+#: components/Blocks/Chatbot/messages
+msgid "maps-instructions"
+msgstr ""
+
+#. Default: "Who it speaks for and how it should answer, in plain sentences. For example: \"You answer questions for the NITheCS website. Keep answers short and friendly.\" Don't put anything private here."
+#: components/Blocks/Chatbot/messages
+msgid "maps-instructions-description"
+msgstr ""
+
+#. Default: "You've reached the question limit for today. Please come back later."
+#: components/Blocks/Chatbot/messages
+msgid "maps-limit-reached"
+msgstr ""
+
+#. Default: "Chat bot name"
+#: components/Blocks/Chatbot/messages
+msgid "maps-name"
+msgstr ""
+
+#. Default: "Shown above each of its answers."
+#: components/Blocks/Chatbot/messages
+msgid "maps-name-description"
+msgstr ""
+
+#. Default: "Hint in the question box"
+#: components/Blocks/Chatbot/messages
+msgid "maps-placeholder"
+msgstr ""
+
+#. Default: "Shown in the empty box where visitors type a question."
+#: components/Blocks/Chatbot/messages
+msgid "maps-placeholder-description"
+msgstr ""
+
+#. Default: "Question"
+#: components/Blocks/Chatbot/messages
+msgid "maps-question"
+msgstr ""
+
+#. Default: "Questions per visitor per day"
+#: components/Blocks/Chatbot/messages
+msgid "maps-question-limit"
+msgstr ""
+
+#. Default: "How many questions one visitor can ask in a day. 0 means no limit."
+#: components/Blocks/Chatbot/messages
+msgid "maps-question-limit-description"
+msgstr ""
+
+#. Default: "{count, plural, one {# question} other {# questions}} remaining today"
+#: components/Blocks/Chatbot/messages
+msgid "maps-questions-remaining"
+msgstr ""
+
+#. Default: "Send"
+#: components/Blocks/Chatbot/messages
+msgid "maps-send"
+msgstr ""
+
+#. Default: "AI accounts"
+#: components/Settings/messages
+msgid "maps-settings-accounts"
+msgstr ""
+
+#. Default: "Add an AI account"
+#: components/Settings/messages
+msgid "maps-settings-add-account"
+msgstr ""
+
+#. Default: "Back"
+#: components/Settings/messages
+msgid "maps-settings-back"
+msgstr ""
+
+#. Default: "Cancel"
+#: components/Settings/messages
+msgid "maps-settings-cancel"
+msgstr ""
+
+#. Default: "Checking"
+#: components/Settings/messages
+msgid "maps-settings-checking"
+msgstr ""
+
+#. Default: "Choose a service…"
+#: components/Settings/messages
+msgid "maps-settings-choose-service"
+msgstr ""
+
+#. Default: "clear it"
+#: components/Settings/messages
+msgid "maps-settings-clear-it"
+msgstr ""
+
+#. Default: "Delete \"{name}\"? This can't be undone."
+#: components/Settings/messages
+msgid "maps-settings-confirm-delete"
+msgstr ""
+
+#. Default: "Connected"
+#: components/Settings/messages
+msgid "maps-settings-connected"
+msgstr ""
+
+#. Default: "Conversations"
+#: components/Settings/messages
+msgid "maps-settings-conversations"
+msgstr ""
+
+#. Default: "Every question visitors asked and the answer they got, from the last 7 days, with the page it was asked on. Reading it is the best way to find what the site is missing."
+#: components/Settings/messages
+msgid "maps-settings-conversations-help"
+msgstr ""
+
+#. Default: "Add account"
+#: components/Settings/messages
+msgid "maps-settings-create"
+msgstr ""
+
+#. Default: "Adding…"
+#: components/Settings/messages
+msgid "maps-settings-creating"
+msgstr ""
+
+#. Default: "Delete"
+#: components/Settings/messages
+msgid "maps-settings-delete"
+msgstr ""
+
+#. Default: "This account has answered questions for a chat bot, so it can't be deleted: those chat bots would stop working. To move to a new key, edit the account instead."
+#: components/Settings/messages
+msgid "maps-settings-delete-in-use"
+msgstr ""
+
+#. Default: "Connect this site to ChatGPT or Claude. Every AI chat bot block on the site answers through one of these accounts. API keys are stored encrypted and are never shown again once saved."
+#: components/Settings/messages
+msgid "maps-settings-description"
+msgstr ""
+
+#. Default: "Download as a spreadsheet (CSV)"
+#: components/Settings/messages
+msgid "maps-settings-download"
+msgstr ""
+
+#. Default: "The conversations couldn't be downloaded."
+#: components/Settings/messages
+msgid "maps-settings-download-failed"
+msgstr ""
+
+#. Default: "Preparing…"
+#: components/Settings/messages
+msgid "maps-settings-downloading"
+msgstr ""
+
+#. Default: "Edit"
+#: components/Settings/messages
+msgid "maps-settings-edit"
+msgstr ""
+
+#. Default: "That didn't work: {message}"
+#: components/Settings/messages
+msgid "maps-settings-failed"
+msgstr ""
+
+#. Default: "In use"
+#: components/Settings/messages
+msgid "maps-settings-in-use"
+msgstr ""
+
+#. Default: "Leave empty to keep the current value, or"
+#: components/Settings/messages
+msgid "maps-settings-keep-secret"
+msgstr ""
+
+#. Default: "The AI accounts couldn't be loaded. Reload the page to try again."
+#: components/Settings/messages
+msgid "maps-settings-load-failed"
+msgstr ""
+
+#. Default: "Loading…"
+#: components/Settings/messages
+msgid "maps-settings-loading"
+msgstr ""
+
+#. Default: "Name"
+#: components/Settings/messages
+msgid "maps-settings-name"
+msgstr ""
+
+#. Default: "What editors see when they choose an account, for example \"Main website (ChatGPT)\"."
+#: components/Settings/messages
+msgid "maps-settings-name-help"
+msgstr ""
+
+#. Default: "No AI accounts yet. Add one, and editors can then choose it in the AI chat bot block."
+#: components/Settings/messages
+msgid "maps-settings-no-accounts"
+msgstr ""
+
+#. Default: "No limit"
+#: components/Settings/messages
+msgid "maps-settings-no-limit"
+msgstr ""
+
+#. Default: "Not connected"
+#: components/Settings/messages
+msgid "maps-settings-not-connected"
+msgstr ""
+
+#. Default: "Not set"
+#: components/Settings/messages
+msgid "maps-settings-not-set"
+msgstr ""
+
+#. Default: "Save"
+#: components/Settings/messages
+msgid "maps-settings-save"
+msgstr ""
+
+#. Default: "Saving…"
+#: components/Settings/messages
+msgid "maps-settings-saving"
+msgstr ""
+
+#. Default: "AI service"
+#: components/Settings/messages
+msgid "maps-settings-service"
+msgstr ""
+
+#. Default: "Set"
+#: components/Settings/messages
+msgid "maps-settings-set"
+msgstr ""
+
+#. Default: "Test connection"
+#: components/Settings/messages
+msgid "maps-settings-test"
+msgstr ""
+
+#. Default: "AI Chatbot"
+#: components/Settings/messages
+msgid "maps-settings-title"
+msgstr ""
+
+#. Default: "undo"
+#: components/Settings/messages
+msgid "maps-settings-undo"
+msgstr ""
+
+#. Default: "Will be cleared"
+#: components/Settings/messages
+msgid "maps-settings-will-be-cleared"
+msgstr ""
+
+#. Default: "Only answer from this site"
+#: components/Blocks/Chatbot/messages
+msgid "maps-site-only"
+msgstr ""
+
+#. Default: "When on, it answers only from this site's pages and documents, and says so when it can't find the answer. When off, it may also use general knowledge."
+#: components/Blocks/Chatbot/messages
+msgid "maps-site-only-description"
+msgstr ""
+
+#. Default: "Sorry, something went wrong. Please try again in a moment."
+#: components/Blocks/Chatbot/messages
+msgid "maps-something-wrong"
+msgstr ""
+
+#. Default: "{count, plural, one {# source} other {# sources}} used"
+#: components/Blocks/Chatbot/messages
+msgid "maps-sources-used"
+msgstr ""
+
+#. Default: "Suggested question"
+#: components/Blocks/Chatbot/messages
+msgid "maps-starter"
+msgstr ""
+
+#. Default: "Suggested questions"
+#: components/Blocks/Chatbot/messages
+msgid "maps-starters"
+msgstr ""
+
+#. Default: "Up to 4 questions visitors can click instead of typing. They disappear once the conversation starts."
+#: components/Blocks/Chatbot/messages
+msgid "maps-starters-description"
+msgstr ""
+
+#. Default: "Thinking…"
+#: components/Blocks/Chatbot/messages
+msgid "maps-thinking"
+msgstr ""
+
+#. Default: "Try it here: it answers with the settings in the sidebar, even ones you haven't saved yet. Questions you ask while editing aren't counted towards the visitor limit."
+#: components/Blocks/Chatbot/messages
+msgid "maps-try-it"
+msgstr ""
+
+#. Default: "Document"
+#: components/Blocks/Chatbot/messages
+msgid "maps-type-document"
+msgstr ""
+
+#. Default: "Event"
+#: components/Blocks/Chatbot/messages
+msgid "maps-type-event"
+msgstr ""
+
+#. Default: "News"
+#: components/Blocks/Chatbot/messages
+msgid "maps-type-news"
+msgstr ""
+
+#. Default: "Page"
+#: components/Blocks/Chatbot/messages
+msgid "maps-type-page"
+msgstr ""
+
+#. Default: "Welcome message"
+#: components/Blocks/Chatbot/messages
+msgid "maps-welcome"
+msgstr ""
+
+#. Default: "The first message visitors see, before they ask anything."
+#: components/Blocks/Chatbot/messages
+msgid "maps-welcome-description"
+msgstr ""
+
+#. Default: "You"
+#: components/Blocks/Chatbot/messages
+msgid "maps-you"
+msgstr ""
+
+#. Default: "Your question"
+#: components/Blocks/Chatbot/messages
+msgid "maps-your-question"
+msgstr ""
+
+#. Default: "This block couldn't be displayed. Try undoing your last change or checking its settings in the sidebar. If it keeps happening, contact your web team."
+#: components/Blocks/_shared/messages
+msgid "juizi-block-error"
+msgstr ""

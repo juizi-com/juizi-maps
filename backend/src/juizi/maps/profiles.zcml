@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="juizi.maps"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Juizi Maps"
+      description="Map block for Volto: pins, totals, shaded regions and contact details on a street map in the site's colours. Needs the volto-juizi-maps frontend add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Juizi Maps (uninstall)"
+      description="Removes the map settings. Map blocks already on pages stay in the page data."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <!-- Example pages for the development site (scripts/create_site.py). -->
+  <genericsetup:registerProfile
+      name="initial"
+      title="Juizi Maps: example pages"
+      description="Pages with example maps, for trying the block out."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/initial"
+      pre_handler=".setuphandlers.initial.create_example_content"
+      />
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="juizi.maps-hiddenprofiles"
+      />
+
+  <include package=".upgrades" />
+
+</configure>
