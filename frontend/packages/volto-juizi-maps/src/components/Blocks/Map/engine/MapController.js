@@ -403,6 +403,15 @@ export default class MapController {
         customAttribution: this.geo ? 'Boundaries: Natural Earth' : undefined,
       }),
     );
+    // On a phone-sized map the open credits cover the bottom of the map:
+    // start them folded (the ⓘ opens them).
+    if (this.container.clientWidth < 640) {
+      this.map.once('load', () =>
+        this.container
+          .querySelector('.maplibregl-ctrl-attrib')
+          ?.classList.remove('maplibregl-compact-show'),
+      );
+    }
     this.map.on('render', () => this.updateMarkers());
     this.map.on('click', 'regions-fill', (e) => this.regionClick(e));
     this.map.on('click', 'regions-dot', (e) => this.regionClick(e));
