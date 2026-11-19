@@ -16,7 +16,9 @@ const normalizeData = (data) =>
     ? {
         ...data,
         places: data.places.map((p) =>
-          p && p.place !== undefined && p.title !== p.place ? { ...p, title: p.place } : p,
+          p && p.place !== undefined && p.title !== p.place
+            ? { ...p, title: p.place }
+            : p,
         ),
       }
     : data;

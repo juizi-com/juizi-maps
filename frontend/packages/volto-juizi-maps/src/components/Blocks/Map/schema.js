@@ -23,7 +23,14 @@ const placeSchema = ({ intl, mode }) => {
     'contactHours',
     'contactOther',
   ];
-  const popupFields = ['summary', 'figures', 'items', 'linkLabel', 'link', 'image'];
+  const popupFields = [
+    'summary',
+    'figures',
+    'items',
+    'linkLabel',
+    'link',
+    'image',
+  ];
   const fieldsets = contact
     ? [
         {
@@ -41,7 +48,13 @@ const placeSchema = ({ intl, mode }) => {
         {
           id: 'default',
           title: intl.formatMessage(messages.place),
-          fields: ['place', 'location', 'number', 'numberLabel', ...popupFields],
+          fields: [
+            'place',
+            'location',
+            'number',
+            'numberLabel',
+            ...popupFields,
+          ],
         },
         {
           id: 'contact',
@@ -82,7 +95,9 @@ const placeSchema = ({ intl, mode }) => {
         schema: {
           title: intl.formatMessage(messages.figure),
           addMessage: intl.formatMessage(messages.figure),
-          fieldsets: [{ id: 'default', title: 'Default', fields: ['value', 'label'] }],
+          fieldsets: [
+            { id: 'default', title: 'Default', fields: ['value', 'label'] },
+          ],
           properties: {
             value: { title: intl.formatMessage(messages.figureValue) },
             label: { title: intl.formatMessage(messages.figureLabel) },
@@ -97,7 +112,9 @@ const placeSchema = ({ intl, mode }) => {
         schema: {
           title: intl.formatMessage(messages.item),
           addMessage: intl.formatMessage(messages.item),
-          fieldsets: [{ id: 'default', title: 'Default', fields: ['title', 'link'] }],
+          fieldsets: [
+            { id: 'default', title: 'Default', fields: ['title', 'link'] },
+          ],
           properties: {
             title: { title: intl.formatMessage(messages.itemTitle) },
             link: {
@@ -132,7 +149,9 @@ const placeSchema = ({ intl, mode }) => {
       },
       contactAddress: {
         title: intl.formatMessage(messages.contactAddress),
-        description: contact ? undefined : intl.formatMessage(messages.contactIntro),
+        description: contact
+          ? undefined
+          : intl.formatMessage(messages.contactIntro),
         widget: 'textarea',
       },
       contactPhone: { title: intl.formatMessage(messages.contactPhone) },
@@ -174,12 +193,13 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
   const allowed = props?.allowedStyles || STYLES;
   const d = withDefaults(data);
   const mode = data.displayMode;
-  const offered = STYLES.filter(
-    (s) => allowed.includes(s) || s === mode,
-  );
+  const offered = STYLES.filter((s) => allowed.includes(s) || s === mode);
   const styleField = {
     title: intl.formatMessage(messages.displayMode),
-    choices: offered.map((s) => [s, intl.formatMessage(messages[`style_${s}`])]),
+    choices: offered.map((s) => [
+      s,
+      intl.formatMessage(messages[`style_${s}`]),
+    ]),
     noValueOption: false,
   };
   if (mode && !allowed.includes(mode)) {
@@ -205,7 +225,8 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
   const lookFields = ['mapLook'];
   if (d.mapLook !== 'street') lookFields.push('mapTone');
   if (d.mapLook !== 'outline') lookFields.push('labels');
-  if (!regions && !contact && d.mapLook !== 'street') lookFields.push('highlight');
+  if (!regions && !contact && d.mapLook !== 'street')
+    lookFields.push('highlight');
   lookFields.push('height');
 
   const pinFields = [];
@@ -228,13 +249,36 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
       {
         id: 'default',
         title: 'Default',
-        fields: ['displayMode', ...(regions ? ['regionSet', 'regionPins'] : [])],
+        fields: [
+          'displayMode',
+          ...(regions ? ['regionSet', 'regionPins'] : []),
+        ],
       },
-      { id: 'places', title: intl.formatMessage(messages.fsPlaces), fields: ['places'] },
-      { id: 'look', title: intl.formatMessage(messages.fsLook), fields: lookFields },
-      { id: 'pins', title: intl.formatMessage(messages.fsPins), fields: pinFields },
-      { id: 'visitors', title: intl.formatMessage(messages.fsVisitors), fields: visitorFields },
-      { id: 'advanced', title: intl.formatMessage(messages.fsAdvanced), fields: ['extraClass'] },
+      {
+        id: 'places',
+        title: intl.formatMessage(messages.fsPlaces),
+        fields: ['places'],
+      },
+      {
+        id: 'look',
+        title: intl.formatMessage(messages.fsLook),
+        fields: lookFields,
+      },
+      {
+        id: 'pins',
+        title: intl.formatMessage(messages.fsPins),
+        fields: pinFields,
+      },
+      {
+        id: 'visitors',
+        title: intl.formatMessage(messages.fsVisitors),
+        fields: visitorFields,
+      },
+      {
+        id: 'advanced',
+        title: intl.formatMessage(messages.fsAdvanced),
+        fields: ['extraClass'],
+      },
     ],
     properties: {
       displayMode: styleField,
@@ -294,7 +338,9 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
       cluster: {
         title: intl.formatMessage(messages.cluster),
         description:
-          mode === 'totals' ? intl.formatMessage(messages.clusterHelpTotals) : undefined,
+          mode === 'totals'
+            ? intl.formatMessage(messages.clusterHelpTotals)
+            : undefined,
         type: 'boolean',
       },
       groupColours: {
@@ -335,7 +381,9 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
           ['show', intl.formatMessage(messages.mobile_show)],
           [
             'hide',
-            intl.formatMessage(contact ? messages.mobile_hide_contact : messages.mobile_hide),
+            intl.formatMessage(
+              contact ? messages.mobile_hide_contact : messages.mobile_hide,
+            ),
           ],
         ],
         noValueOption: false,

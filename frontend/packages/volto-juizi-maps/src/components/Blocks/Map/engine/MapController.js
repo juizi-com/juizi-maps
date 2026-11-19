@@ -26,13 +26,7 @@
  *   onNavigate(href)   follow an internal link without reloading the page
  *   onSelect(id|null)  a place's pop-up opened or closed
  */
-import {
-  contrast,
-  INK,
-  isDark,
-  mix,
-  toneColours,
-} from './colour';
+import { contrast, INK, isDark, mix, toneColours } from './colour';
 import {
   commonLabel,
   directionsHref,
@@ -43,7 +37,7 @@ import {
   telHref,
   whatsappHref,
 } from './places';
-import { regionTotals, regionFeatures } from './regions';
+import { regionTotals, regionFeatures, tinyRegionDots } from './regions';
 
 const STREET_LABELS =
   /^(highway-name|highway-shield|road_shield|road_one_way|poi_|airport)/;
@@ -190,6 +184,29 @@ export default class MapController {
           filter: ['>', ['get', 'total'], 0],
           paint: { 'line-color': '#ffffff', 'line-width': 1 },
         });
+        sources['regions-dots'] = {
+          type: 'geojson',
+          data: tinyRegionDots(this.geo, this.opts.regionSet, info, this.shown),
+        };
+        layers.push({
+          id: 'regions-dot',
+          type: 'circle',
+          source: 'regions-dots',
+          paint: {
+            'circle-radius': 7,
+            'circle-color': [
+              'interpolate',
+              ['linear'],
+              ['get', 'total'],
+              1,
+              low,
+              max === 1 ? 2 : max,
+              high,
+            ],
+            'circle-stroke-color': '#ffffff',
+            'circle-stroke-width': 2,
+          },
+        });
       } else if (highlight && mapLook !== 'street') {
         layers.push({
           id: 'regions-fill',
@@ -324,7 +341,9 @@ export default class MapController {
       } else if (l.type === 'line') {
         if (/water|river|stream/.test(id)) l.paint['line-color'] = t.water;
         else if (/boundary|admin/.test(id)) l.paint['line-color'] = t.border;
-        else if (/road|highway|street|bridge|tunnel|path|rail|aeroway/.test(id)) {
+        else if (
+          /road|highway|street|bridge|tunnel|path|rail|aeroway/.test(id)
+        ) {
           l.paint['line-color'] = /casing/.test(id)
             ? mix(t.land, t.border, 0.5)
             : t.road;
@@ -386,12 +405,16 @@ export default class MapController {
     );
     this.map.on('render', () => this.updateMarkers());
     this.map.on('click', 'regions-fill', (e) => this.regionClick(e));
+    this.map.on('click', 'regions-dot', (e) => this.regionClick(e));
     this.map.on('mousemove', (e) => {
       const hit =
         this.opts.displayMode === 'regions' &&
         this.map.getLayer('regions-fill') &&
-        this.map.queryRenderedFeatures(e.point, { layers: ['regions-fill'] })
-          .length;
+        this.map.queryRenderedFeatures(e.point, {
+          layers: ['regions-fill', 'regions-dot'].filter((l) =>
+            this.map.getLayer(l),
+          ),
+        }).length;
       this.map.getCanvas().style.cursor = hit ? 'pointer' : '';
     });
     this.fit();
@@ -423,6 +446,16 @@ export default class MapController {
         this.map
           .getSource('regions')
           .setData(regionFeatures(this.geo, opts.regionSet, this.regionInfo()));
+        this.map
+          .getSource('regions-dots')
+          ?.setData(
+            tinyRegionDots(
+              this.geo,
+              opts.regionSet,
+              this.regionInfo(),
+              this.shown,
+            ),
+          );
       }
     }
     this.clearMarkers();
@@ -487,19 +520,26 @@ export default class MapController {
       b.innerHTML = TEARDROP(c, w, h, !totals);
       if (totals) {
         b.append(
-          el('span', { class: 'jmap-pin__label', text: fmt(n), style: `width:${w}px` }),
+          el('span', {
+            class: 'jmap-pin__label',
+            text: fmt(n),
+            style: `width:${w}px`,
+          }),
         );
       }
     } else if (pinShape === 'dot') {
       const size = totals ? Math.round(26 + Math.sqrt(n) * 4) : 18;
       b.style.cssText = `width:${size}px;height:${size}px;background:${c}`;
-      if (totals) b.append(el('span', { class: 'jmap-pin__label', text: fmt(n) }));
+      if (totals)
+        b.append(el('span', { class: 'jmap-pin__label', text: fmt(n) }));
     } else {
       b.style.background = c;
       if (totals) {
         b.append(el('span', { class: 'jmap-pin__label', text: fmt(n) }));
         if (p.numberLabel) {
-          b.append(el('span', { class: 'jmap-pin__unit', text: p.numberLabel }));
+          b.append(
+            el('span', { class: 'jmap-pin__unit', text: p.numberLabel }),
+          );
         }
       } else {
         b.append(el('span', { class: 'jmap-pin__label', text: p.place }));
@@ -630,7 +670,12 @@ export default class MapController {
     const { displayMode, regionPins, pinShape } = this.opts;
     if (displayMode === 'regions' && !regionPins) return 0;
     if (pinShape === 'pin') {
-      return { bottom: [0, -44], top: [0, 0], left: [16, -22], right: [-16, -22] };
+      return {
+        bottom: [0, -44],
+        top: [0, 0],
+        left: [16, -22],
+        right: [-16, -22],
+      };
     }
     return 20;
   }
@@ -641,7 +686,12 @@ export default class MapController {
     if (external) {
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      a.append(el('span', { class: 'jmap-sr-only', text: ` ${this.opts.strings.newTab}` }));
+      a.append(
+        el('span', {
+          class: 'jmap-sr-only',
+          text: ` ${this.opts.strings.newTab}`,
+        }),
+      );
     } else if (this.opts.onNavigate) {
       a.addEventListener('click', (e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
@@ -681,7 +731,9 @@ export default class MapController {
     const { strings } = this.opts;
     const out = [];
     if (c.address.trim()) {
-      out.push(el('p', { class: 'jmap-contact__address' }, ...lines(c.address)));
+      out.push(
+        el('p', { class: 'jmap-contact__address' }, ...lines(c.address)),
+      );
     }
     const dl = el('dl', { class: 'jmap-contact__rows' });
     if (c.phone.trim()) {
@@ -708,11 +760,18 @@ export default class MapController {
     if (c.email.trim()) {
       dl.append(
         el('dt', { text: strings.email }),
-        el('dd', {}, el('a', { href: `mailto:${c.email.trim()}`, text: c.email })),
+        el(
+          'dd',
+          {},
+          el('a', { href: `mailto:${c.email.trim()}`, text: c.email }),
+        ),
       );
     }
     if (full && c.hours.trim()) {
-      dl.append(el('dt', { text: strings.hours }), el('dd', {}, ...lines(c.hours)));
+      dl.append(
+        el('dt', { text: strings.hours }),
+        el('dd', {}, ...lines(c.hours)),
+      );
     }
     if (dl.children.length) out.push(dl);
     if (full && c.other.trim()) {
@@ -720,7 +779,9 @@ export default class MapController {
         el(
           'div',
           { class: 'jmap-contact__other' },
-          ...c.other.split(/\n\s*\n/).map((para) => el('p', {}, ...lines(para))),
+          ...c.other
+            .split(/\n\s*\n/)
+            .map((para) => el('p', {}, ...lines(para))),
         ),
       );
     }
@@ -728,7 +789,8 @@ export default class MapController {
   }
 
   placePopup(p) {
-    const { popupStyle, displayMode, itemLimit, pinColour, strings } = this.opts;
+    const { popupStyle, displayMode, itemLimit, pinColour, strings } =
+      this.opts;
     const wrap = el('div', { class: 'jmap-pop' });
     const hasNumber = p.number != null;
     const heading = () => el('h3', { class: 'jmap-pop__place', text: p.place });
@@ -736,22 +798,31 @@ export default class MapController {
       const body = el('div', { class: 'jmap-pop__body' }, heading());
       if (hasNumber) body.append(this.countLine(p.number, p.numberLabel));
       if (p.contact.address.trim()) {
-        body.append(el('p', { class: 'jmap-pop__addr' }, ...lines(p.contact.address)));
+        body.append(
+          el('p', { class: 'jmap-pop__addr' }, ...lines(p.contact.address)),
+        );
       }
-      if (displayMode === 'contact') body.append(this.directionsLink(p, 'jmap-pop__link'));
+      if (displayMode === 'contact')
+        body.append(this.directionsLink(p, 'jmap-pop__link'));
       if (p.linkHref && p.linkLabel) {
-        body.append(this.link(p.linkHref, `${p.linkLabel} →`, 'jmap-pop__link'));
+        body.append(
+          this.link(p.linkHref, `${p.linkLabel} →`, 'jmap-pop__link'),
+        );
       }
       wrap.append(body);
       return wrap;
     }
-    if (p.image) wrap.append(el('img', { class: 'jmap-pop__img', src: p.image, alt: '' }));
+    if (p.image)
+      wrap.append(el('img', { class: 'jmap-pop__img', src: p.image, alt: '' }));
     const body = el('div', { class: 'jmap-pop__body' });
     if (popupStyle === 'band') {
       const ink = isDark(pinColour) ? '#ffffff' : INK;
       const head = el(
         'div',
-        { class: 'jmap-pop__head', style: `background:${pinColour};color:${ink}` },
+        {
+          class: 'jmap-pop__head',
+          style: `background:${pinColour};color:${ink}`,
+        },
         heading(),
       );
       if (hasNumber) head.append(this.countLine(p.number, p.numberLabel));
@@ -761,13 +832,16 @@ export default class MapController {
       body.append(heading());
       if (hasNumber) body.append(this.countLine(p.number, p.numberLabel));
     }
-    if (p.summary) body.append(el('p', { class: 'jmap-pop__summary', text: p.summary }));
+    if (p.summary)
+      body.append(el('p', { class: 'jmap-pop__summary', text: p.summary }));
     if (p.figures.length) {
       body.append(
         el(
           'ul',
           { class: 'jmap-pop__figures' },
-          ...p.figures.map((f) => el('li', {}, el('b', { text: f.value }), ` ${f.label}`)),
+          ...p.figures.map((f) =>
+            el('li', {}, el('b', { text: f.value }), ` ${f.label}`),
+          ),
         ),
       );
     }
@@ -845,7 +919,8 @@ export default class MapController {
               {},
               el('span', { text: p.place }),
               el('span', {
-                text: p.number != null ? `${fmt(p.number)} ${p.numberLabel}` : '',
+                text:
+                  p.number != null ? `${fmt(p.number)} ${p.numberLabel}` : '',
               }),
             ),
           ),
@@ -859,8 +934,14 @@ export default class MapController {
   regionClick(e) {
     if (this.opts.displayMode !== 'regions') return;
     const f = e.features[0];
-    const info = this.regionInfo()[f.properties.key];
-    if (info) this.showPopup(e.lngLat, this.regionPopup(f.properties.name, info));
+    const { key } = f.properties;
+    if (String(key).startsWith('place:')) {
+      this.openPlace(key.slice(6), false);
+      return;
+    }
+    const info = this.regionInfo()[key];
+    if (info)
+      this.showPopup(e.lngLat, this.regionPopup(f.properties.name, info));
   }
 
   showPopup(lngLat, content) {
@@ -876,7 +957,9 @@ export default class MapController {
       .setLngLat(lngLat)
       .setDOMContent(content)
       .addTo(this.map);
-    const closeBtn = this.popup.getElement().querySelector('.maplibregl-popup-close-button');
+    const closeBtn = this.popup
+      .getElement()
+      .querySelector('.maplibregl-popup-close-button');
     if (closeBtn) closeBtn.setAttribute('aria-label', this.opts.strings.close);
     const popup = this.popup;
     popup.on('close', () => {
@@ -927,7 +1010,8 @@ export default class MapController {
         const bottomPad = 36; // room for the map credits line
         let dx = 0;
         let dy = 0;
-        if (r.bottom > m.bottom - bottomPad) dy = r.bottom - m.bottom + bottomPad;
+        if (r.bottom > m.bottom - bottomPad)
+          dy = r.bottom - m.bottom + bottomPad;
         if (r.top - dy < m.top + pad) dy = r.top - m.top - pad;
         if (r.right > m.right - pad) dx = r.right - m.right + pad;
         if (r.left - dx < m.left + pad) dx = r.left - m.left - pad;

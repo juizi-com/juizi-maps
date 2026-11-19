@@ -26,7 +26,11 @@ const MapsSettingsPanel = () => {
   const allowed = draft.allowed_styles || [];
 
   if (state.loaded && state.installed === false) {
-    return <p className="juizi-dashboard__error">{intl.formatMessage(messages.notInstalled)}</p>;
+    return (
+      <p className="juizi-dashboard__error">
+        {intl.formatMessage(messages.notInstalled)}
+      </p>
+    );
   }
 
   const toggle = (style) => {
@@ -86,7 +90,9 @@ const MapsSettingsPanel = () => {
           <legend>
             <h2>{intl.formatMessage(messages.styles)}</h2>
           </legend>
-          <p className="juizi-dashboard__help">{intl.formatMessage(messages.stylesHelp)}</p>
+          <p className="juizi-dashboard__help">
+            {intl.formatMessage(messages.stylesHelp)}
+          </p>
           <div className="juizi-dashboard__list">
             {STYLES.map((s) => (
               <label key={s} className="jmaps-settings__check">
@@ -97,7 +103,9 @@ const MapsSettingsPanel = () => {
                   onChange={() => toggle(s)}
                 />
                 <span>
-                  <strong>{intl.formatMessage(blockMessages[`style_${s}`])}</strong>
+                  <strong>
+                    {intl.formatMessage(blockMessages[`style_${s}`])}
+                  </strong>
                   {' — '}
                   {intl.formatMessage(blockMessages[`style_${s}_desc`])}
                 </span>
@@ -109,9 +117,13 @@ const MapsSettingsPanel = () => {
 
       <section className="juizi-dashboard__section">
         <h2>
-          <label htmlFor="jmaps-directions">{intl.formatMessage(messages.directions)}</label>
+          <label htmlFor="jmaps-directions">
+            {intl.formatMessage(messages.directions)}
+          </label>
         </h2>
-        <p className="juizi-dashboard__help">{intl.formatMessage(messages.directionsHelp)}</p>
+        <p className="juizi-dashboard__help">
+          {intl.formatMessage(messages.directionsHelp)}
+        </p>
         <select
           id="jmaps-directions"
           className="juizi-dashboard__select"
@@ -122,7 +134,9 @@ const MapsSettingsPanel = () => {
           }}
         >
           <option value="google">{intl.formatMessage(messages.google)}</option>
-          <option value="openstreetmap">{intl.formatMessage(messages.osm)}</option>
+          <option value="openstreetmap">
+            {intl.formatMessage(messages.osm)}
+          </option>
         </select>
       </section>
     </div>

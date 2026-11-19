@@ -35,8 +35,10 @@ const useStrings = (intl) =>
       openDetails: intl.formatMessage(messages.openDetails),
       zoomIn: intl.formatMessage(messages.zoomIn),
       placesWord: intl.formatMessage(messages.placesWord),
-      placesCount: (count) => intl.formatMessage(messages.placesCount, { count }),
-      groupPlaces: (count) => intl.formatMessage(messages.groupPlaces, { count }),
+      placesCount: (count) =>
+        intl.formatMessage(messages.placesCount, { count }),
+      groupPlaces: (count) =>
+        intl.formatMessage(messages.groupPlaces, { count }),
       groupTotal: (count, total) =>
         intl.formatMessage(messages.groupTotal, { count, total }),
       showAll: (count) => intl.formatMessage(messages.showAll, { count }),
@@ -58,9 +60,15 @@ const useStrings = (intl) =>
         'NavigationControl.ZoomOut': intl.formatMessage(messages.zoomOutCtrl),
         'FullscreenControl.Enter': intl.formatMessage(messages.fullscreen),
         'FullscreenControl.Exit': intl.formatMessage(messages.exitFullscreen),
-        'CooperativeGesturesHandler.WindowsHelpText': intl.formatMessage(messages.ctrlZoom),
-        'CooperativeGesturesHandler.MacHelpText': intl.formatMessage(messages.cmdZoom),
-        'CooperativeGesturesHandler.MobileHelpText': intl.formatMessage(messages.touchPan),
+        'CooperativeGesturesHandler.WindowsHelpText': intl.formatMessage(
+          messages.ctrlZoom,
+        ),
+        'CooperativeGesturesHandler.MacHelpText': intl.formatMessage(
+          messages.cmdZoom,
+        ),
+        'CooperativeGesturesHandler.MobileHelpText': intl.formatMessage(
+          messages.touchPan,
+        ),
         'Popup.Close': intl.formatMessage(messages.close),
       },
     }),
@@ -127,12 +135,29 @@ const MapBlock = (props) => {
         onNavigate: (href) => history.push(href),
         onSelect: setActiveId,
         onShade: (next) =>
-          setShade((cur) => (JSON.stringify(cur) === JSON.stringify(next) ? cur : next)),
+          setShade((cur) =>
+            JSON.stringify(cur) === JSON.stringify(next) ? cur : next,
+          ),
       },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [resolved, mode, d.regionSet, d.regionPins, d.mapLook, d.mapTone, d.labels,
-      d.maxZoom, d.pinShape, d.cluster, d.groupColours, d.highlight,
-      d.popupStyle, d.itemLimit, settings.directions, strings],
+    [
+      resolved,
+      mode,
+      d.regionSet,
+      d.regionPins,
+      d.mapLook,
+      d.mapTone,
+      d.labels,
+      d.maxZoom,
+      d.pinShape,
+      d.cluster,
+      d.groupColours,
+      d.highlight,
+      d.popupStyle,
+      d.itemLimit,
+      settings.directions,
+      strings,
+    ],
   );
 
   if (!mode) {
@@ -168,7 +193,10 @@ const MapBlock = (props) => {
     if (!isEditMode) return null;
     return (
       <BlockWrapper {...props} className={`jmap-block type-${mode}`}>
-        <BlockPlaceholder blockClass="jmap" prompt={intl.formatMessage(messages.emptyPrompt)} />
+        <BlockPlaceholder
+          blockClass="jmap"
+          prompt={intl.formatMessage(messages.emptyPrompt)}
+        />
         {hint}
       </BlockWrapper>
     );
@@ -179,14 +207,23 @@ const MapBlock = (props) => {
   const single = contact && places.length === 1;
   const height = HEIGHTS[d.height] || HEIGHTS.medium;
   const pinsShown = mode !== 'regions' || d.regionPins;
-  const unit = totals || mode === 'regions' ? commonLabel(places) : intl.formatMessage(messages.placesWord);
+  const unit =
+    totals || mode === 'regions'
+      ? commonLabel(places)
+      : intl.formatMessage(messages.placesWord);
 
   // The colour key, once the colours are known.
   const legendRows = [];
   if (resolved && !failed) {
     if (mode === 'regions' && shade) {
       legendRows.push(
-        <ShadeKey key="shade" low={shade.low} high={shade.high} max={shade.max} unit={unit} />,
+        <ShadeKey
+          key="shade"
+          low={shade.low}
+          high={shade.high}
+          max={shade.max}
+          unit={unit}
+        />,
       );
     }
     if (d.cluster && pinsShown && !contact && places.length > 1) {
@@ -197,24 +234,34 @@ const MapBlock = (props) => {
         const l = resolved.list;
         cs = [c, l[(i + 1) % l.length], l[(i + 2) % l.length]];
       } else {
-        cs = d.mapTone === 'dark'
-          ? [mix(c, '#ffffff', 0.45), mix(c, '#ffffff', 0.15), c]
-          : [mix(c, '#ffffff', 0.4), c, mix(c, '#000000', 0.4)];
+        cs =
+          d.mapTone === 'dark'
+            ? [mix(c, '#ffffff', 0.45), mix(c, '#ffffff', 0.15), c]
+            : [mix(c, '#ffffff', 0.4), c, mix(c, '#000000', 0.4)];
       }
       legendRows.push(
-        <GroupKey key="groups" colours={cs} breaks={groupBreaks(places, totals)} unit={unit} />,
+        <GroupKey
+          key="groups"
+          colours={cs}
+          breaks={groupBreaks(places, totals)}
+          unit={unit}
+        />,
       );
     }
   }
 
   const colourWarning =
-    isEditMode && resolved && d.mapLook !== 'street' &&
+    isEditMode &&
+    resolved &&
+    d.mapLook !== 'street' &&
     pinContrast(resolved.pin, d.mapTone, resolved.main) < 2.2;
 
   const showPlace = (id) => {
     if (!canvasRef.current) return;
     // On phones with the map hidden, the list is just a list.
-    const canvas = document.querySelector(`[data-jmap="${props.block || props.id}"] .jmap__canvas`);
+    const canvas = document.querySelector(
+      `[data-jmap="${props.block || props.id}"] .jmap__canvas`,
+    );
     if (canvas && canvas.offsetParent === null) return;
     canvasRef.current.openPlace(id);
   };
@@ -227,7 +274,9 @@ const MapBlock = (props) => {
     d.mobileMap === 'hide' ? 'jmap--nomap-phone' : '',
     failed ? 'jmap--failed' : '',
     d.extraClass || '',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <BlockWrapper {...props} className={`jmap-block type-${mode}`}>
@@ -251,13 +300,23 @@ const MapBlock = (props) => {
                 opts={opts}
                 height={height}
                 label={intl.formatMessage(messages.mapLabel, {
-                  places: intl.formatMessage(messages.mapLabelPlaces, { count: places.length }),
+                  places: intl.formatMessage(messages.mapLabelPlaces, {
+                    count: places.length,
+                  }),
                 })}
                 onFail={() => setFailed(true)}
               />
             ) : (
-              <div className="jmap__canvas jmap__canvas--waiting" style={{ height }} aria-hidden="true">
-                {failed && <p className="jmap__failed">{intl.formatMessage(messages.mapUnavailable)}</p>}
+              <div
+                className="jmap__canvas jmap__canvas--waiting"
+                style={{ height }}
+                aria-hidden="true"
+              >
+                {failed && (
+                  <p className="jmap__failed">
+                    {intl.formatMessage(messages.mapUnavailable)}
+                  </p>
+                )}
               </div>
             )}
           </div>

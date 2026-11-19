@@ -35,8 +35,14 @@ const MapsSettingsPage = () => {
     <div className="juizi-dashboard jmaps-settings-page">
       <Helmet title={intl.formatMessage(messages.title)} />
       <h1>{intl.formatMessage(messages.title)}</h1>
-      <p className="juizi-dashboard__description">{intl.formatMessage(messages.description)}</p>
-      {withBlocks && <p className="juizi-dashboard__help">{intl.formatMessage(messages.alsoInBlocks)}</p>}
+      <p className="juizi-dashboard__description">
+        {intl.formatMessage(messages.description)}
+      </p>
+      {withBlocks && (
+        <p className="juizi-dashboard__help">
+          {intl.formatMessage(messages.alsoInBlocks)}
+        </p>
+      )}
 
       <MapsSettingsPanel />
 
@@ -44,7 +50,11 @@ const MapsSettingsPage = () => {
       <div className="juizi-dashboard__version-footer">
         <span className="juizi-dashboard__credit">
           <span aria-hidden>❤️🤖</span> Vibe Coded with Care by{' '}
-          <a href="https://github.com/aboycalledhero" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/aboycalledhero"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             aboycalledhero
           </a>
         </span>

@@ -15,7 +15,10 @@ import './location-widget.scss';
 const STYLE = 'https://tiles.openfreemap.org/styles/liberty';
 
 const inRange = (lat, lng) =>
-  Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
+  Number.isFinite(lat) &&
+  Number.isFinite(lng) &&
+  Math.abs(lat) <= 90 &&
+  Math.abs(lng) <= 180;
 
 const round = (n) => Math.round(n * 1e6) / 1e6;
 
@@ -93,7 +96,10 @@ const LocationWidget = (props) => {
         attributionControl: { compact: true },
         cooperativeGestures: false,
       });
-      m.addControl(new lib.NavigationControl({ showCompass: false }), 'top-right');
+      m.addControl(
+        new lib.NavigationControl({ showCompass: false }),
+        'top-right',
+      );
       // Credits start folded on this small map (the ⓘ opens them).
       m.once('load', () => {
         box.current
@@ -128,7 +134,10 @@ const LocationWidget = (props) => {
       marker.current.setLngLat([ln, la]);
     }
     if (fly) {
-      map.current.flyTo({ center: [ln, la], zoom: Math.max(map.current.getZoom(), 12) });
+      map.current.flyTo({
+        center: [ln, la],
+        zoom: Math.max(map.current.getZoom(), 12),
+      });
     }
   };
 
@@ -136,7 +145,8 @@ const LocationWidget = (props) => {
   useEffect(() => {
     if (has) {
       const p = marker.current?.getLngLat();
-      const moved = !p || Math.abs(p.lat - lat) > 1e-7 || Math.abs(p.lng - lng) > 1e-7;
+      const moved =
+        !p || Math.abs(p.lat - lat) > 1e-7 || Math.abs(p.lng - lng) > 1e-7;
       if (moved) placeMarker(Number(lat), Number(lng), !p || moved);
     } else if (marker.current) {
       marker.current.remove();
@@ -146,7 +156,11 @@ const LocationWidget = (props) => {
 
   const typed = (key) => (e) => {
     const raw = e.target.value.trim();
-    const next = { lat: value?.lat ?? '', lng: value?.lng ?? '', [key]: raw === '' ? '' : Number(raw) };
+    const next = {
+      lat: value?.lat ?? '',
+      lng: value?.lng ?? '',
+      [key]: raw === '' ? '' : Number(raw),
+    };
     set(next.lat === '' && next.lng === '' ? undefined : next);
   };
 
@@ -168,7 +182,9 @@ const LocationWidget = (props) => {
     <FormFieldWrapper {...props} className="jmap-location">
       <div className="jmap-location__body">
         <div ref={box} className="jmap-location__map" />
-        <p className="jmap-location__hint">{intl.formatMessage(messages.pickHint)}</p>
+        <p className="jmap-location__hint">
+          {intl.formatMessage(messages.pickHint)}
+        </p>
         <div className="jmap-location__coords">
           <label>
             <span>{intl.formatMessage(messages.latitude)}</span>
@@ -204,12 +220,20 @@ const LocationWidget = (props) => {
           />
         </label>
         {pasteError && (
-          <p id={`${id}-paste-error`} className="jmap-location__error" role="alert">
+          <p
+            id={`${id}-paste-error`}
+            className="jmap-location__error"
+            role="alert"
+          >
             {intl.formatMessage(messages.pasteBad)}
           </p>
         )}
         {has && (
-          <button type="button" className="jmap-location__clear" onClick={() => set(undefined)}>
+          <button
+            type="button"
+            className="jmap-location__clear"
+            onClick={() => set(undefined)}
+          >
             {intl.formatMessage(messages.clearLocation)}
           </button>
         )}

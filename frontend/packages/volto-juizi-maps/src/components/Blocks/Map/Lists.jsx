@@ -31,9 +31,17 @@ const Link = ({ href, className, children }) => {
   const intl = useIntl();
   if (isExternal(href)) {
     return (
-      <a className={className} href={href} target="_blank" rel="noopener noreferrer">
+      <a
+        className={className}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {children}
-        <span className="jmap-sr-only"> {intl.formatMessage(messages.newTab)}</span>
+        <span className="jmap-sr-only">
+          {' '}
+          {intl.formatMessage(messages.newTab)}
+        </span>
       </a>
     );
   }
@@ -51,19 +59,34 @@ export const GroupKey = ({ colours, breaks, unit }) => {
   const intl = useIntl();
   const key = (c, text) => (
     <span className="jmap__key" key={text}>
-      <span className="jmap__dot" style={{ background: c }} aria-hidden="true" />
+      <span
+        className="jmap__dot"
+        style={{ background: c }}
+        aria-hidden="true"
+      />
       <span>{text}</span>
     </span>
   );
   return (
     <div className="jmap__legend-row">
-      <span className="jmap__legend-title">{intl.formatMessage(messages.groupsKey)}</span>
-      {key(colours[0], intl.formatMessage(messages.under, { n: fmt(breaks.small) }))}
+      <span className="jmap__legend-title">
+        {intl.formatMessage(messages.groupsKey)}
+      </span>
+      {key(
+        colours[0],
+        intl.formatMessage(messages.under, { n: fmt(breaks.small) }),
+      )}
       {key(
         colours[1],
-        intl.formatMessage(messages.between, { a: fmt(breaks.small), b: fmt(breaks.large) }),
+        intl.formatMessage(messages.between, {
+          a: fmt(breaks.small),
+          b: fmt(breaks.large),
+        }),
       )}
-      {key(colours[2], intl.formatMessage(messages.over, { n: fmt(breaks.large), unit }))}
+      {key(
+        colours[2],
+        intl.formatMessage(messages.over, { n: fmt(breaks.large), unit }),
+      )}
     </div>
   );
 };
@@ -85,11 +108,14 @@ export const ShadeKey = ({ low, high, max, unit }) => (
 export const PlaceList = ({ places, hidden, canShow, onShow }) => {
   const intl = useIntl();
   const sorted = [...places].sort(
-    (a, b) => (b.number || 0) - (a.number || 0) || a.place.localeCompare(b.place),
+    (a, b) =>
+      (b.number || 0) - (a.number || 0) || a.place.localeCompare(b.place),
   );
   return (
     <div className={`jmap__list${hidden ? ' jmap-sr-only' : ''}`}>
-      <h3 className="jmap__list-title">{intl.formatMessage(messages.allPlaces)}</h3>
+      <h3 className="jmap__list-title">
+        {intl.formatMessage(messages.allPlaces)}
+      </h3>
       <ul className="jmap__places">
         {sorted.map((p) => (
           <li key={p.id}>
@@ -122,7 +148,11 @@ export const PlaceList = ({ places, hidden, canShow, onShow }) => {
                   <ul>
                     {p.items.map((it, i) => (
                       <li key={it.id || i}>
-                        {it.href ? <Link href={it.href}>{it.title}</Link> : it.title}
+                        {it.href ? (
+                          <Link href={it.href}>{it.title}</Link>
+                        ) : (
+                          it.title
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -137,7 +167,14 @@ export const PlaceList = ({ places, hidden, canShow, onShow }) => {
 };
 
 /** schema.org markup so search engines can show the office details. */
-const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) => {
+const ContactCard = ({
+  place: p,
+  single,
+  active,
+  canShow,
+  onShow,
+  directions,
+}) => {
   const intl = useIntl();
   const c = p.contact;
   const phone2Label = {
@@ -152,7 +189,9 @@ const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) 
       itemScope
       itemType="https://schema.org/Place"
     >
-      {p.image && <img className="jmap-office__img" src={p.image} alt="" loading="lazy" />}
+      {p.image && (
+        <img className="jmap-office__img" src={p.image} alt="" loading="lazy" />
+      )}
       <h3 className="jmap-office__name" itemProp="name">
         {p.place}
       </h3>
@@ -179,7 +218,11 @@ const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) 
               <dt>{intl.formatMessage(phone2Label)}</dt>
               <dd>
                 {c.phone2Type === 'whatsapp' ? (
-                  <a href={whatsappHref(c.phone2)} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={whatsappHref(c.phone2)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {c.phone2}
                   </a>
                 ) : (
@@ -218,7 +261,11 @@ const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) 
         </div>
       )}
       {p.hasLocation && (
-        <span itemProp="geo" itemScope itemType="https://schema.org/GeoCoordinates">
+        <span
+          itemProp="geo"
+          itemScope
+          itemType="https://schema.org/GeoCoordinates"
+        >
           <meta itemProp="latitude" content={String(p.lat)} />
           <meta itemProp="longitude" content={String(p.lng)} />
         </span>
@@ -232,11 +279,18 @@ const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) 
             rel="noopener noreferrer"
           >
             {intl.formatMessage(messages.directions)}
-            <span className="jmap-sr-only"> {intl.formatMessage(messages.newTab)}</span>
+            <span className="jmap-sr-only">
+              {' '}
+              {intl.formatMessage(messages.newTab)}
+            </span>
           </a>
         )}
         {!single && canShow && p.hasLocation && (
-          <button type="button" className="jmap-office__show" onClick={() => onShow(p.id)}>
+          <button
+            type="button"
+            className="jmap-office__show"
+            onClick={() => onShow(p.id)}
+          >
             {intl.formatMessage(messages.showOnMap)}
           </button>
         )}
@@ -250,12 +304,20 @@ const ContactCard = ({ place: p, single, active, canShow, onShow, directions }) 
   );
 };
 
-export const ContactCards = ({ places, activeId, canShow, onShow, directions }) => {
+export const ContactCards = ({
+  places,
+  activeId,
+  canShow,
+  onShow,
+  directions,
+}) => {
   const intl = useIntl();
   const single = places.length === 1;
   return (
     <div className="jmap__offices">
-      <h3 className="jmap-sr-only">{intl.formatMessage(messages.contactDetails)}</h3>
+      <h3 className="jmap-sr-only">
+        {intl.formatMessage(messages.contactDetails)}
+      </h3>
       {places.map((p) => (
         <ContactCard
           key={p.id}

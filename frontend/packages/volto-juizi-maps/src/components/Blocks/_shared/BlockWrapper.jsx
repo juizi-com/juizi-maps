@@ -16,7 +16,9 @@ const BlockWrapper = ({ data = {}, className = '', children }) => {
     config.settings?.blockModel === 3 &&
     config.blocks?.blocksConfig?.[type]?.blockModel === 3;
   if (v3) return <>{children}</>;
-  return <div className={`block ${type || ''} ${className}`.trim()}>{children}</div>;
+  return (
+    <div className={`block ${type || ''} ${className}`.trim()}>{children}</div>
+  );
 };
 
 export default BlockWrapper;

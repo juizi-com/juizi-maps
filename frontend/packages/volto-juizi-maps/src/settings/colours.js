@@ -35,8 +35,9 @@ export const getExtension = () => {
   // Volto versions: never let that stop the map rendering.
   try {
     return (
-      config.getUtility({ type: 'blockExtension', name: 'juiziMap' })?.method?.() ||
-      {}
+      config
+        .getUtility({ type: 'blockExtension', name: 'juiziMap' })
+        ?.method?.() || {}
     );
   } catch {
     return {};

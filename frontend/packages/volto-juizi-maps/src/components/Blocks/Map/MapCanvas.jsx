@@ -6,7 +6,13 @@
  * The parent passes a ref; `ref.current.openPlace(id)` opens a place's
  * pop-up (from the list or a contact card).
  */
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import MapController from './engine/MapController';
 
 let geoPromise = null;
@@ -23,7 +29,9 @@ const loadGeo = () => {
 const needsGeo = (opts) =>
   opts.mapLook === 'outline' ||
   opts.displayMode === 'regions' ||
-  (opts.highlight && opts.mapLook !== 'street' && opts.displayMode !== 'contact');
+  (opts.highlight &&
+    opts.mapLook !== 'street' &&
+    opts.displayMode !== 'contact');
 
 const MapCanvas = forwardRef(({ places, opts, label, height, onFail }, ref) => {
   const box = useRef(null);

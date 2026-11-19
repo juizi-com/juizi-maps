@@ -98,3 +98,59 @@ export function regionFeatures(geo, regionSet, info) {
     })),
   };
 }
+
+// A region smaller than this (bounding box, square degrees, about 2° x 2°)
+// can't be seen at country zoom, so it also gets a dot: Mauritius,
+// Seychelles, Eswatini at world scale.
+const TINY = 4;
+
+const bboxArea = (g) => {
+  let [x0, y0, x1, y1] = [Infinity, Infinity, -Infinity, -Infinity];
+  polygons(g).forEach((poly) =>
+    poly[0].forEach(([x, y]) => {
+      x0 = Math.min(x0, x);
+      y0 = Math.min(y0, y);
+      x1 = Math.max(x1, x);
+      y1 = Math.max(y1, y);
+    }),
+  );
+  return (x1 - x0) * (y1 - y0);
+};
+
+/** Dots for shaded regions too small to see, at their places' middle, and
+ * for places outside every region (a point at sea, a country missing from
+ * the shapes), so no place silently disappears from a shaded map. */
+export function tinyRegionDots(geo, regionSet, info, places = []) {
+  const src = regionSet === 'provinces' ? geo.provinces : geo.countries;
+  const key = regionKey(regionSet);
+  const features = [];
+  src.features.forEach((f) => {
+    const r = info[f.properties[key]];
+    if (!r || !r.places.length || bboxArea(f.geometry) >= TINY) return;
+    const lng = r.places.reduce((a, p) => a + p.lng, 0) / r.places.length;
+    const lat = r.places.reduce((a, p) => a + p.lat, 0) / r.places.length;
+    features.push({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [lng, lat] },
+      properties: {
+        key: f.properties[key],
+        name: f.properties.name,
+        total: Math.max(r.total, 1),
+      },
+    });
+  });
+  places
+    .filter((p) => !regionOf(p, geo, regionSet))
+    .forEach((p) =>
+      features.push({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+        properties: {
+          key: `place:${p.id}`,
+          name: p.place,
+          total: Math.max(p.number || 0, 1),
+        },
+      }),
+    );
+  return { type: 'FeatureCollection', features };
+}
