@@ -23,7 +23,7 @@ import { ContactCards, GroupKey, Legend, PlaceList, ShadeKey } from './Lists';
 import messages from './messages';
 import { HEIGHTS, STYLES, withDefaults } from './defaults';
 import { commonLabel, groupBreaks, toPlaces } from './engine/places';
-import { mix, resolveColour } from './engine/colour';
+import { contrast, mix, resolveColour } from './engine/colour';
 import { pinContrast } from './engine/MapController';
 import { getColours } from '../../../settings/colours';
 import useMapsSettings from '../../../settings/useMapsSettings';
@@ -103,10 +103,15 @@ const MapBlock = (props) => {
   // page); the server renders no map and no colour key.
   const resolved = useMemo(() => {
     if (!mounted) return null;
-    const list = colourValues.split('|').map((v) => resolveColour(v));
+    // Site lists often start with white or a pale grey (JET: White first),
+    // which vanish on a light map: the main colour, the default pin colour
+    // and "the site's colours" for groups use only colours that stand out.
+    const all = colourValues.split('|').map((v) => resolveColour(v));
+    const usable = all.filter((c) => contrast(c, '#ffffff') >= 2.5);
+    const list = usable.length ? usable : all;
     return {
       main: list[0],
-      pin: resolveColour(d.pinColour || colourValues.split('|')[0], list[0]),
+      pin: d.pinColour ? resolveColour(d.pinColour, list[0]) : list[0],
       list,
     };
   }, [mounted, colourValues, d.pinColour]);
@@ -283,7 +288,7 @@ const MapBlock = (props) => {
       <div
         className={classes}
         data-jmap={props.block || props.id}
-        style={{ '--jmap-accent': d.pinColour || getColours()[0].value }}
+        style={{ '--jmap-accent': resolved?.pin || d.pinColour || getColours()[0].value }}
       >
         {hint}
         {colourWarning && (

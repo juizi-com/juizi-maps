@@ -737,3 +737,15 @@
 .jmap--failed .jmap__map {
   min-height: 0 !important;
 }
+
+// Themes (VLT) colour and underline every link; the map's credits keep
+// MapLibre's quiet look.
+.jmap .maplibregl-ctrl-attrib a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
