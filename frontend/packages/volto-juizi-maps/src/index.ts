@@ -5,6 +5,7 @@ import LocationWidget from './components/Widgets/LocationWidget';
 import PlacesListWidget from './components/Widgets/PlacesListWidget';
 import MapsSettingsPage from './components/Settings/MapsSettingsPage';
 import MapsSettingsPanel from './components/Settings/MapsSettingsPanel';
+import settingsMessages from './components/Settings/messages';
 import juiziMapsSettings from './settings/reducer';
 import { getExtension } from './settings/colours';
 import offerAddon, { availableAddon } from './offerAddon';
@@ -50,7 +51,12 @@ function applyConfig(config: ConfigType) {
   config.registerUtility({
     type: 'juiziDashboardTab',
     name: 'maps',
-    method: () => ({ title: 'Maps', order: 50, Component: MapsSettingsPanel }),
+    method: () => ({
+      id: 'maps',
+      title: settingsMessages.title,
+      order: 50,
+      Component: MapsSettingsPanel,
+    }),
   });
 
   // Site Setup → Add-ons offers the backend add-on on this frontend; the
