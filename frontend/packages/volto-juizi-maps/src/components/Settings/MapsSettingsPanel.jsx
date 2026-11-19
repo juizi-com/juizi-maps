@@ -127,7 +127,7 @@ const MapsSettingsPanel = () => {
         <select
           id="jmaps-directions"
           className="juizi-dashboard__select"
-          value={draft.directions}
+          value={draft.directions || 'google'}
           onChange={(e) => {
             setDone(false);
             setDraft({ ...draft, directions: e.target.value });
