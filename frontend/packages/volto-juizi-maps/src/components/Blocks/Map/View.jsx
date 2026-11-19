@@ -288,7 +288,10 @@ const MapBlock = (props) => {
       <div
         className={classes}
         data-jmap={props.block || props.id}
-        style={{ '--jmap-accent': resolved?.pin || d.pinColour || getColours()[0].value }}
+        style={{
+          '--jmap-accent':
+            resolved?.pin || d.pinColour || getColours()[0].value,
+        }}
       >
         {hint}
         {colourWarning && (

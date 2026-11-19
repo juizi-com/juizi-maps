@@ -1,87 +1,26 @@
-# juizi.maps
+# juizi.maps (backend)
 
-AI chat bot block for Volto that answers from the site's own content, connecting to ChatGPT or Claude
+The Plone side of the Map block. See the [repository README](../README.md).
 
-## Features
+- Settings record `juizi.maps.settings` (JSON): which display styles
+  editors may choose (`allowed_styles`) and where "Get directions" goes
+  (`directions`: `google` or `openstreetmap`). Read through
+  `juizi.maps.settings.get_settings()`, which always returns complete,
+  valid settings.
+- Service `@juizi-maps-settings` on the site root: GET for anyone who can
+  view the site (the block needs it on public pages; it holds nothing
+  private), PATCH for Managers, validated (400 with a message on bad input).
+- Profiles: `default` (install), `uninstall`, and `initial` (example pages
+  under `/maps`, for the dev site; never offered in Site Setup).
+- Hidden from Site Setup → Add-ons until installed on that site (shared
+  backends), offered by the frontend add-on instead.
 
-TODO: List our awesome features
+The block's places are saved in the page's blocks like any Volto block;
+the backend has no content types.
 
-## Installation
-
-Install juizi.maps with uv.
-
-```shell
-uv add juizi.maps
+```sh
+make install
+make create-site    # site "Plone" with the example pages
+make start          # localhost:8098
+.venv/bin/pytest
 ```
-
-Create the Plone site.
-
-```shell
-make create-site
-```
-
-## Contribute
-
-- [Issue tracker](https://github.com/juizi-com/juizi-maps/issues)
-- [Source code](https://github.com/juizi-com/juizi-maps/)
-
-### Prerequisites ✅
-
--   An [operating system](https://6.docs.plone.org/install/create-project-cookieplone.html#prerequisites-for-installation) that runs all the requirements mentioned.
--   [uv](https://6.docs.plone.org/install/create-project-cookieplone.html#uv)
--   [Make](https://6.docs.plone.org/install/create-project-cookieplone.html#make)
--   [Git](https://6.docs.plone.org/install/create-project-cookieplone.html#git)
--   [Docker](https://docs.docker.com/get-started/get-docker/) (optional)
-
-### Installation 🔧
-
-1.  Clone this repository.
-
-    ```shell
-    git clone git@github.com:juizi-com/juizi-maps.git
-    cd juizi-maps/backend
-    ```
-
-2.  Install this code base.
-
-    ```shell
-    make install
-    ```
-
-
-### Add features using `plonecli` or `bobtemplates.plone`
-
-This package provides markers as strings (`<!-- extra stuff goes here -->`) that are compatible with [`plonecli`](https://github.com/plone/plonecli) and [`bobtemplates.plone`](https://github.com/plone/bobtemplates.plone).
-These markers act as hooks to add all kinds of features through subtemplates, including behaviors, control panels, upgrade steps, or other subtemplates from `bobtemplates.plone`.
-`plonecli` is a command line client for `bobtemplates.plone`, adding autocompletion and other features.
-
-To add a feature as a subtemplate to your package, use the following command pattern.
-
-```shell
-make add <template_name>
-```
-
-For example, you can add a content type to your package with the following command.
-
-```shell
-make add content_type
-```
-
-You can add a behavior with the following command.
-
-```shell
-make add behavior
-```
-
-```{seealso}
-You can check the list of available subtemplates in the [`bobtemplates.plone` `README.md` file](https://github.com/plone/bobtemplates.plone/?tab=readme-ov-file#provided-subtemplates).
-See also the documentation of [Mockup and Patternslib](https://6.docs.plone.org/classic-ui/mockup.html) for how to build the UI toolkit for Classic UI.
-```
-
-## License
-
-The project is licensed under GPLv2.
-
-## Credits and acknowledgements 🙏
-
-Generated from the [`cookieplone-templates`  template](https://github.com/plone/cookieplone-templates/tree/main/) on 2026-10-01 05:18:54.. A special thanks to all contributors and supporters!
