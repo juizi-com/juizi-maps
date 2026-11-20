@@ -215,6 +215,40 @@ work's project lines into items. Delete the page when the trial is over.
 **D33. maplibre-gl 5.24.0 sits beside JET's 4.0.2** (used by the old
 counting block) until the old blocks are removed.
 
+## 2026-11-20: JET maps replaced, cookie banner
+
+**D34. JET's 15 old maps were converted, not retyped** (the user asked for
+them to be replaced; D32 assumed by hand). Rules and what was lost:
+`~/notes/juizi-maps/JET-CHANGES.md`. Each new block keeps the old block's
+id and position; the old blocks are kept on the private `/old-map-blocks`.
+Counter maps use the site's colours for group sizes, matching the live
+maps' coloured groups.
+
+**D35. Several close places open zoomed in until they separate** (up to
+zoom 12 at first, then the block's Closest zoom). Before, project maps
+opened no closer than zoom 6, so Eduten's 20 Soweto schools showed as one
+"20 places" group until the visitor zoomed. One place still opens at
+country level.
+
+**D36. The map redraws when its box changes size**, not only the window
+(ResizeObserver). And on phones the map's wrapper now shrinks with the map:
+its inline minimum height beat the phone maximum, leaving a 120px empty
+band under every phone map. I'd called that band a screenshot artefact in
+the first build; it was real, on the vanilla site too.
+
+**D37. The cookie banner doesn't gate the map.** volto-gdpr-privacy only
+holds back the embeds it knows (YouTube, Vimeo, and so on); the Map block
+loads OpenFreeMap tiles straight away, before and after consent. Checked
+on JET: tiles load, pins work, the banner covers the lower part of a phone
+screen until it's answered. OpenFreeMap sets no cookies, so I left it
+ungated; the visitor's address still reaches OpenFreeMap's servers. Gating
+it would mean a "Show the map" placeholder until a "maps" provider is
+accepted (see the open questions).
+
+**D38. JET's banner uses dark turquoise for text and filled buttons.**
+JET's turquoise on white is 3.7:1, under the 4.5:1 AA needs for text; dark
+turquoise is 10.2:1. Turquoise stays for the top line and toggles.
+
 ## Open questions for the morning
 
 1. D10: one place or two for the map settings when juizi-blocks is there?
@@ -228,3 +262,12 @@ counting block) until the old blocks are removed.
    clone on `fix/plain-url-images` with the 5 November work. When it's
    time, they go on their own branch from main as one PR
    (`~/notes/juizi-maps/juizi-blocks-maps.patch`).
+7. D37: should the map wait for consent (a "maps" provider in the cookie
+   settings and a placeholder), or is ungated fine because OpenFreeMap sets
+   no cookies?
+8. JET's banner text is collective.volto.gdprcookie's default (it mentions
+   profiling cookies, reCAPTCHA and Meta, and a "Cookie Policy" that isn't
+   a link). It needs JET's own wording and policy link in Site Setup.
+   Also: volto-google-analytics loads Google Analytics whatever the banner
+   says, on JET as on ACQF, so the "Google Analytics" toggle does nothing
+   yet.

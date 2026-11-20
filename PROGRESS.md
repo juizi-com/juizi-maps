@@ -29,6 +29,17 @@ Done:
 - [x] READMEs (repo, backend, frontend, block with draft happy path and
       hesitation points), DECISIONS.md.
 
+## 2026-11-20
+
+- [x] JET: all 15 old maps copied to the private `/old-map-blocks` (with
+      where they were) and replaced in place by Map blocks; all 14 pages
+      checked in the browser.
+- [x] Map fixes from that: close places open zoomed in (D35); redraw on
+      box resize and no empty band under phone maps (D36).
+- [x] JET: cookie banner (volto-gdpr-privacy + ACQF's Video fix), styled
+      for JET; checked with the maps (no interference, D37) and videos
+      (placeholder before consent, video after accepting and reloading).
+
 Next (after the morning review):
 - [ ] Answers to the open questions at the end of DECISIONS.md
 - [ ] First-time editor test by a person (the block README's happy path
