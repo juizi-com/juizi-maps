@@ -677,14 +677,17 @@ export default class MapController {
           // MapLibre makes its marker element a focusable "Map marker"
           // around our own button (two tab stops, nested controls for
           // screen readers); our button is the one control.
+          this.markerCache[key] = m;
+        }
+        next[key] = m;
+        if (!this.onScreen[key]) {
+          m.addTo(map);
+          // (addTo sets them, so after it.)
           const w = m.getElement();
           ['role', 'tabindex', 'aria-label'].forEach((x) =>
             w.removeAttribute(x),
           );
-          this.markerCache[key] = m;
         }
-        next[key] = m;
-        if (!this.onScreen[key]) m.addTo(map);
       });
     }
     Object.keys(this.onScreen).forEach((k) => {
@@ -979,6 +982,9 @@ export default class MapController {
   }
 
   showPopup(lngLat, content) {
+    // Whatever opened it (a pin, a list button, a contact card) gets focus
+    // back when the pop-up closes.
+    const opener = document.activeElement;
     this.closePopup();
     const compact = this.opts.popupStyle === 'compact';
     this.popup = new this.ml.Popup({
@@ -995,11 +1001,28 @@ export default class MapController {
       .getElement()
       .querySelector('.maplibregl-popup-close-button');
     if (closeBtn) closeBtn.setAttribute('aria-label', this.opts.strings.close);
+    // A dialog named after its heading, closed with Escape.
+    const box = this.popup.getElement();
+    box.setAttribute('role', 'dialog');
+    const title = content.querySelector('h2, h3, h4');
+    if (title) box.setAttribute('aria-label', title.textContent.trim());
     const popup = this.popup;
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        popup.remove();
+      }
+    });
     popup.on('close', () => {
       if (this.popup === popup) {
         this.popup = null;
         this.opts.onSelect?.(null);
+        const lost =
+          !document.activeElement ||
+          document.activeElement === document.body ||
+          box.contains(document.activeElement);
+        if (lost && opener?.isConnected && opener !== document.body)
+          opener.focus({ preventScroll: true });
       }
     });
     this.keepPopupInView();
