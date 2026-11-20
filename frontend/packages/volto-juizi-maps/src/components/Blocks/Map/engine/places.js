@@ -136,6 +136,25 @@ export const commonLabel = (places) => {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
 };
 
+/**
+ * Whether the list under the map should put each count under its name
+ * instead of beside it. One long line is enough, so every item gets the
+ * same layout: a name and count together longer than STACK_AT characters
+ * ("Mkhanyakude District Municipality" + "34 primary schools") don't share
+ * a list column without the name breaking into short pieces. Narrow
+ * columns stack anyway (map.scss).
+ */
+export const STACK_AT = 30;
+export const stackList = (places) =>
+  places.some(
+    (p) =>
+      (p.place || '').length +
+        (p.number != null
+          ? `${p.number} ${p.numberLabel || ''}`.trim().length + 1
+          : 0) >
+      STACK_AT,
+  );
+
 export const telHref = (phone) => `tel:${String(phone).replace(/[^\d+]/g, '')}`;
 export const whatsappHref = (phone) =>
   `https://wa.me/${String(phone).replace(/[^\d]/g, '')}`;

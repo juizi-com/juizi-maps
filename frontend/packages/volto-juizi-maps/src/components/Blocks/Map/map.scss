@@ -144,6 +144,15 @@
     gap: 12px;
   }
 
+  // Names break between words only (some themes break anywhere, which
+  // gave "Mkhanyak / ude").
+  > li > button,
+  .jmap__place-name {
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
   button {
     padding: 0;
     border: 0;
@@ -172,6 +181,34 @@
   .jmap__n {
     color: var(--jmap-muted);
     white-space: nowrap;
+  }
+}
+
+// Long names (stackList in engine/places.js): every count goes under its
+// name, so the items line up the same way. Wider columns, so names wrap
+// less.
+.jmap__places--stacked {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  > li {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
+  }
+
+  .jmap__n {
+    font-size: 0.9375em;
+    white-space: normal;
+  }
+}
+
+// A very narrow block (a sidebar column) stacks whatever the names; a
+// phone's single column is wide enough for rows.
+@container jmap (max-width: 300px) {
+  .jmap__places > li {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
   }
 }
 

@@ -203,3 +203,28 @@ describe('colour', () => {
     expect(contrast('#000000', '#ffffff')).toBeCloseTo(21, 0);
   });
 });
+
+describe('stackList', () => {
+  const { stackList } = require('../engine/places');
+  it('stacks when one name and count are long together', () => {
+    expect(
+      stackList([
+        { place: 'Uthukela', number: 30 },
+        {
+          place: 'Mkhanyakude District Municipality',
+          number: 34,
+          numberLabel: 'primary schools',
+        },
+      ]),
+    ).toBe(true);
+  });
+  it('keeps rows for short lines', () => {
+    expect(
+      stackList([
+        { place: 'Rustenburg', number: 20, numberLabel: 'schools' },
+        { place: 'Ga-Mampuru', number: 7, numberLabel: 'schools' },
+      ]),
+    ).toBe(false);
+    expect(stackList([{ place: 'Ilembe District Municipality' }])).toBe(false);
+  });
+});

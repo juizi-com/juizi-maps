@@ -14,6 +14,7 @@ import {
   isExternal,
   telHref,
   whatsappHref,
+  stackList,
 } from './engine/places';
 
 const Lines = ({ text }) =>
@@ -116,7 +117,11 @@ export const PlaceList = ({ places, hidden, canShow, onShow }) => {
       <h3 className="jmap__list-title">
         {intl.formatMessage(messages.allPlaces)}
       </h3>
-      <ul className="jmap__places">
+      <ul
+        className={`jmap__places${
+          stackList(places) ? ' jmap__places--stacked' : ''
+        }`}
+      >
         {sorted.map((p) => (
           <li key={p.id}>
             {canShow ? (
