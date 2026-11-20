@@ -510,9 +510,14 @@ export default class MapController {
     // in a single group), never past the block's "Closest zoom".
     let closest = 15;
     if (this.opts.displayMode !== 'contact') closest = pts.length > 1 ? 12 : 6;
-    const padding = Math.min(60, (this.container.clientHeight || 300) / 5);
+    const pad = Math.min(60, (this.container.clientHeight || 300) / 5);
+    // Leave room under the total in the top corner, so no pin opens under it.
+    const total = this.container.parentElement?.querySelector('.jmap__total');
+    const top = total
+      ? Math.max(pad, total.offsetTop + total.offsetHeight + 16)
+      : pad;
     this.map.fitBounds(b, {
-      padding,
+      padding: { top, bottom: pad, left: pad, right: pad },
       maxZoom: Math.min(closest, this.opts.maxZoom),
       duration: 0,
     });
