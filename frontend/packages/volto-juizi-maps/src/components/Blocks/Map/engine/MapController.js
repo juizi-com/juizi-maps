@@ -413,6 +413,13 @@ export default class MapController {
       );
     }
     this.map.on('render', () => this.updateMarkers());
+    // MapLibre only follows window resizes. The map's box also changes when
+    // the page around it shifts (a cookie banner closing, fonts loading, a
+    // sidebar opening), which left the map drawn in part of its box.
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => this.map?.resize());
+      this.resizeObserver.observe(this.container);
+    }
     this.map.on('click', 'regions-fill', (e) => this.regionClick(e));
     this.map.on('click', 'regions-dot', (e) => this.regionClick(e));
     this.map.on('mousemove', (e) => {
@@ -482,6 +489,7 @@ export default class MapController {
 
   destroy() {
     this.destroyed = true;
+    this.resizeObserver?.disconnect();
     this.closePopup();
     this.clearMarkers();
     this.map?.remove();
