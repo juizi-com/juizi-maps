@@ -20,6 +20,7 @@ export const BASE_DEFAULTS = {
   highlight: true,
   popupStyle: 'card',
   itemLimit: '5',
+  showTotal: false,
   maxZoom: '10',
   listMode: 'visible',
   mobileMap: 'show',

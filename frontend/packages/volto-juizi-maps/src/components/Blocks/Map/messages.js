@@ -244,6 +244,29 @@ export default defineMessages({
   shape_dot: { id: 'juiziMap.shape.dot', defaultMessage: 'Dot' },
   shape_badge: { id: 'juiziMap.shape.badge', defaultMessage: 'Label' },
   pinColour: { id: 'juiziMap.pinColour', defaultMessage: 'Pin colour' },
+  showTotal: {
+    id: 'juiziMap.showTotal',
+    defaultMessage: 'Show the total on the map',
+  },
+  showTotalHelp: {
+    id: 'juiziMap.showTotalHelp',
+    defaultMessage:
+      'Adds up the {label} at every place and shows the total in a corner of the map.',
+  },
+  showTotalHelpPins: {
+    id: 'juiziMap.showTotalHelpPins',
+    defaultMessage:
+      'Adds up the {label} at every place and shows the total in a corner of the map. The pins then show just their numbers.',
+  },
+  totalHidden: {
+    id: 'juiziMap.totalHidden',
+    defaultMessage:
+      'The total isn’t shown: the places don’t all count the same thing. Give them the same “What it counts”, or turn off “Show the total on the map”.',
+  },
+  totalAcross: {
+    id: 'juiziMap.totalAcross',
+    defaultMessage: '{count, plural, one {at # place} other {across # places}}',
+  },
   cluster: {
     id: 'juiziMap.cluster',
     defaultMessage: 'Group pins that are close together',

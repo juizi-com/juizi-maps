@@ -228,3 +228,22 @@ describe('stackList', () => {
     expect(stackList([{ place: 'Ilembe District Municipality' }])).toBe(false);
   });
 });
+
+describe('sharedLabel and sumNumbers', () => {
+  const { sharedLabel, sumNumbers } = require('../engine/places');
+  const p = (number, numberLabel) => ({ number, numberLabel });
+  it('finds one label shared by every counted place', () => {
+    expect(
+      sharedLabel([p(30, 'primary schools'), p(34, 'Primary Schools ')]),
+    ).toBe('primary schools');
+    expect(sharedLabel([p(30, 'schools'), { number: null }])).toBe('schools');
+  });
+  it('is null when labels differ or one is missing', () => {
+    expect(sharedLabel([p(30, 'schools'), p(4, 'teachers')])).toBe(null);
+    expect(sharedLabel([p(30, 'schools'), p(4)])).toBe(null);
+    expect(sharedLabel([])).toBe(null);
+  });
+  it('adds up the numbers', () => {
+    expect(sumNumbers([p(30), p(34), { number: null }])).toBe(64);
+  });
+});

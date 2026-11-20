@@ -557,7 +557,8 @@ export default class MapController {
       b.style.background = c;
       if (totals) {
         b.append(el('span', { class: 'jmap-pin__label', text: fmt(n) }));
-        if (p.numberLabel) {
+        // With the total shown on the map, the pins carry just the number.
+        if (p.numberLabel && !this.opts.hideUnit) {
           b.append(
             el('span', { class: 'jmap-pin__unit', text: p.numberLabel }),
           );

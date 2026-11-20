@@ -155,6 +155,25 @@ export const stackList = (places) =>
       STACK_AT,
   );
 
+/**
+ * What every place counts, when they all count the same thing ("primary
+ * schools"), else null. Only then can the map show one total for them all.
+ * Places without a number don't count against it.
+ */
+export const sharedLabel = (places) => {
+  const counted = places.filter((p) => p.number != null);
+  if (!counted.length) return null;
+  const labels = counted.map((p) => (p.numberLabel || '').trim());
+  const first = labels[0];
+  if (!first) return null;
+  return labels.every((l) => l.toLowerCase() === first.toLowerCase())
+    ? first
+    : null;
+};
+
+export const sumNumbers = (places) =>
+  places.reduce((t, p) => t + (Number(p.number) || 0), 0);
+
 export const telHref = (phone) => `tel:${String(phone).replace(/[^\d+]/g, '')}`;
 export const whatsappHref = (phone) =>
   `https://wa.me/${String(phone).replace(/[^\d]/g, '')}`;

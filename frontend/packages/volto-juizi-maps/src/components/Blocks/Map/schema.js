@@ -7,6 +7,7 @@
  */
 import messages from './messages';
 import { STYLES, withDefaults } from './defaults';
+import { sharedLabel, toPlaces } from './engine/places';
 import { getColours } from '../../../settings/colours';
 
 const choices = (intl, prefix, values) =>
@@ -236,6 +237,11 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
     pinFields.push('cluster');
     if (d.cluster) pinFields.push('groupColours');
   }
+  // One total for the whole map, when every place counts the same thing.
+  const label =
+    (mode === 'totals' || regions) &&
+    sharedLabel(toPlaces(d.places).filter((p) => p.ok));
+  if (label) pinFields.push('showTotal');
   pinFields.push('popupStyle');
   if (!contact && d.popupStyle !== 'compact') pinFields.push('itemLimit');
 
@@ -348,6 +354,16 @@ export default function mapSchema({ intl, data, formData, props } = {}) {
         description: intl.formatMessage(messages.groupColoursHelp),
         choices: choices(intl, 'groups', ['shades', 'site']),
         noValueOption: false,
+      },
+      showTotal: {
+        title: intl.formatMessage(messages.showTotal),
+        description: intl.formatMessage(
+          mode === 'totals'
+            ? messages.showTotalHelpPins
+            : messages.showTotalHelp,
+          { label: label || '' },
+        ),
+        type: 'boolean',
       },
       popupStyle: {
         title: intl.formatMessage(messages.popupStyle),

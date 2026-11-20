@@ -26,6 +26,7 @@
 }
 
 .jmap__map {
+  position: relative;
   overflow: hidden;
   border-radius: var(--jmap-radius);
   background: var(--jmap-wash);
@@ -70,6 +71,54 @@
     font: inherit;
     font-weight: 700;
     text-decoration: underline;
+  }
+}
+
+// The map's total ("160 primary schools across 5 places"), top left, clear
+// of the zoom buttons (top right) and the credits (bottom).
+.jmap__total {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  max-width: min(16rem, calc(100% - 80px));
+  flex-direction: column;
+  padding: 10px 14px;
+  margin: 0;
+  background: rgb(255 255 255 / 94%);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+  color: #222;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.jmap__total-n {
+  color: var(--jmap-accent-dark, var(--jmap-accent));
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.jmap__total-label {
+  font-weight: 600;
+}
+
+.jmap__total-across {
+  color: #555;
+  font-size: 0.875em;
+}
+
+@container jmap (max-width: 600px) {
+  .jmap__total {
+    top: 8px;
+    left: 8px;
+    padding: 6px 10px;
+  }
+
+  .jmap__total-n {
+    font-size: 1.35rem;
   }
 }
 

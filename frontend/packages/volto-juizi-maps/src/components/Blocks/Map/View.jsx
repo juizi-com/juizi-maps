@@ -26,7 +26,14 @@ import useMapConsent from './consent';
 import { ContactCards, GroupKey, Legend, PlaceList, ShadeKey } from './Lists';
 import messages from './messages';
 import { HEIGHTS, STYLES, withDefaults } from './defaults';
-import { commonLabel, groupBreaks, toPlaces } from './engine/places';
+import {
+  commonLabel,
+  formatNumber,
+  groupBreaks,
+  sharedLabel,
+  sumNumbers,
+  toPlaces,
+} from './engine/places';
 import { contrast, mix, resolveColour } from './engine/colour';
 import { pinContrast } from './engine/MapController';
 import { getColours } from '../../../settings/colours';
@@ -159,6 +166,15 @@ const MapBlock = (props) => {
     };
   }, [mounted, colourValues, d.pinColour]);
 
+  // One total in a corner of the map (totals and regions styles), only
+  // when every place counts the same thing.
+  const totalLabel =
+    d.showTotal && (mode === 'totals' || mode === 'regions')
+      ? sharedLabel(places)
+      : null;
+  const totalHidden =
+    d.showTotal && (mode === 'totals' || mode === 'regions') && !totalLabel;
+
   const opts = useMemo(
     () =>
       resolved && {
@@ -178,6 +194,7 @@ const MapBlock = (props) => {
         highlight: !!d.highlight,
         popupStyle: d.popupStyle,
         itemLimit: Number(d.itemLimit) || 5,
+        hideUnit: !!totalLabel,
         directions: settings.directions,
         strings,
         onNavigate: (href) => history.push(href),
@@ -203,6 +220,7 @@ const MapBlock = (props) => {
       d.highlight,
       d.popupStyle,
       d.itemLimit,
+      totalLabel,
       settings.directions,
       strings,
     ],
@@ -338,6 +356,11 @@ const MapBlock = (props) => {
         }}
       >
         {hint}
+        {totalHidden && (
+          <EditHint isEditMode={isEditMode} tone="warning">
+            {intl.formatMessage(messages.totalHidden)}
+          </EditHint>
+        )}
         {colourWarning && (
           <EditHint isEditMode tone="warning" live>
             {intl.formatMessage(messages.colourHard)}
@@ -348,6 +371,19 @@ const MapBlock = (props) => {
             className="jmap__map"
             style={{ minHeight: height, '--jmap-height': `${height}px` }}
           >
+            {totalLabel && !noMap && (
+              <p className="jmap__total">
+                <span className="jmap__total-n">
+                  {formatNumber(sumNumbers(places))}
+                </span>{' '}
+                <span className="jmap__total-label">{totalLabel}</span>{' '}
+                <span className="jmap__total-across">
+                  {intl.formatMessage(messages.totalAcross, {
+                    count: places.length,
+                  })}
+                </span>
+              </p>
+            )}
             {opts && !noMap ? (
               <MapCanvas
                 ref={canvasRef}
