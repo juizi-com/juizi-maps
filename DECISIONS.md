@@ -249,6 +249,27 @@ accepted (see the open questions).
 JET's turquoise on white is 3.7:1, under the 4.5:1 AA needs for text; dark
 turquoise is 10.2:1. Turquoise stays for the top line and toggles.
 
+**D39. The map waits for the cookie banner when a site has one**
+(replaces D37, at the user's request). `consent.js` reads what
+volto-gdpr-privacy leaves behind (its settings in the page data, its Redux
+state, its `<version>_accepted_providers` cookie) without importing it, so
+plain Volto and sites without the banner are unchanged. Rules:
+- a banner choice for the map (reference URL matching openfreemap.org, or
+  key MAPS) decides; under Technical cookies it's always on;
+- no such choice: "Only necessary cookies" keeps the map off, accepting
+  any optional choice shows it (and a banner with no optional choices
+  shows it once answered);
+- no answer yet: no map, and no request to OpenFreeMap at all.
+Instead of the map, visitors get a note in the map's place (same height,
+so nothing jumps) with "Enable Maps cookies" (saved like the banner's own
+link) or, without a map choice, "Show the map this time" (this page view
+only), plus "manage your cookie preferences"; the list or contact cards
+show as when the map fails. The note also carries the banner's
+`volto-gdpr-embed-disabled` class, so a site's video-placeholder styling
+applies. Editors always get the map. The sidebar's location picker isn't
+gated (editors only). On JET I added a **Maps** choice to the banner's
+optional cookies (backup of the settings in ~/notes/juizi-maps).
+
 ## Open questions for the morning
 
 1. D10: one place or two for the map settings when juizi-blocks is there?
@@ -262,9 +283,7 @@ turquoise is 10.2:1. Turquoise stays for the top line and toggles.
    clone on `fix/plain-url-images` with the 5 November work. When it's
    time, they go on their own branch from main as one PR
    (`~/notes/juizi-maps/juizi-blocks-maps.patch`).
-7. D37: should the map wait for consent (a "maps" provider in the cookie
-   settings and a placeholder), or is ungated fine because OpenFreeMap sets
-   no cookies?
+7. (Answered: the map waits for the banner, D39.)
 8. JET's banner text is collective.volto.gdprcookie's default (it mentions
    profiling cookies, reCAPTCHA and Meta, and a "Cookie Policy" that isn't
    a link). It needs JET's own wording and policy link in Site Setup.

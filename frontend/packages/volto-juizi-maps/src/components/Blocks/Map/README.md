@@ -15,6 +15,7 @@ Juizi group when juizi-blocks is installed.
 | `Lists.jsx` | the key, the list of places, the contact cards (schema.org `Place`); server-rendered |
 | `engine/MapController.js` | everything MapLibre: styles, recolouring, markers, groups, shading, pop-ups |
 | `engine/places.js`, `regions.js`, `colour.js` | pure helpers (unit-tested in `__tests__/`) |
+| `consent.js` | cookie banner support: reads volto-gdpr-privacy's settings, state and cookie (no import); `useMapConsent` |
 | `defaults.js` | settings used when the block hasn't saved them, per style |
 | `schema.js`, `messages.js` | the sidebar |
 | `../../Widgets/LocationWidget.jsx` | "Where it is": small map, latitude/longitude, paste box |
@@ -83,6 +84,20 @@ on).
   flagged.
 - If the map can't load (no WebGL, tiles blocked), the list or cards
   still show, with a short message.
+- On a site with a cookie banner, a note in the map's place until the
+  visitor allows maps (see Cookie banner).
+
+## Cookie banner
+
+On a site with volto-gdpr-privacy (and collective.volto.gdprcookie), the
+map waits for the visitor's consent, because its tiles come from
+OpenFreeMap. Add a choice to the banner (Site Setup → GDPR cookie
+settings, optional cookies) with the reference URL `openfreemap.org`, or
+the key `MAPS`, so visitors can allow maps on their own. Without one, the
+map shows once the visitor accepts any optional cookies. Until then the
+map's place holds a note with buttons to allow it; the list or contact
+cards show as usual. Editors always see the map. Rules in `consent.js`;
+sites without the banner are unaffected.
 
 ## Saved data
 
@@ -161,7 +176,8 @@ Nice to fix:
   JET's edit page comes from a react-select field in JET/VLT, not this
   block: the vanilla site's edit page doesn't show it.
 - Tiles and fonts come from tiles.openfreemap.org. If a site's Content
-  Security Policy is strict, it needs allowing.
+  Security Policy is strict, it needs allowing. On a site with the cookie
+  banner they load only after consent.
 - The "street map in the site's colours" recolours OpenFreeMap's Positron
   style in the browser, picking layers by their ids (water, park,
   building, road…). If OpenFreeMap renames layers, the map still draws,

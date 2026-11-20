@@ -39,6 +39,11 @@ Done:
 - [x] JET: cookie banner (volto-gdpr-privacy + ACQF's Video fix), styled
       for JET; checked with the maps (no interference, D37) and videos
       (placeholder before consent, video after accepting and reloading).
+- [x] Map waits for the cookie banner when a site has one (D39); Maps
+      choice added to JET's banner; checked: no OpenFreeMap requests
+      before consent, Only necessary keeps it off, Enable Maps cookies and
+      Accept all show it without a reload, it stays after reloading;
+      vanilla site unchanged. 38 unit tests.
 
 Next (after the morning review):
 - [ ] Answers to the open questions at the end of DECISIONS.md
