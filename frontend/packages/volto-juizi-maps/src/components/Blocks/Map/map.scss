@@ -122,6 +122,24 @@
   }
 }
 
+// Volto Light Theme (block model 2) sets each of its own block types to the
+// text width, with a 20px gutter on small screens; blocks it doesn't know
+// get the full layout width and no gutter, so on phones the map and its
+// list touched the screen edges. Same width and gutter as VLT's text here.
+// Plain Volto has no .blocks-group-wrapper (its container already has a
+// gutter), so this only applies under VLT.
+#page-document .blocks-group-wrapper > .block.juiziMap {
+  max-width: none;
+  margin-right: max(
+    20px,
+    calc((100% - var(--default-container-width, 940px)) / 2)
+  );
+  margin-left: max(
+    20px,
+    calc((100% - var(--default-container-width, 940px)) / 2)
+  );
+}
+
 // ---------- Key ----------
 
 .jmap__legend {
