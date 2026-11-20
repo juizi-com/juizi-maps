@@ -300,7 +300,10 @@ const MapBlock = (props) => {
           </EditHint>
         )}
         <div className="jmap__main">
-          <div className="jmap__map" style={{ minHeight: height }}>
+          <div
+            className="jmap__map"
+            style={{ minHeight: height, '--jmap-height': `${height}px` }}
+          >
             {opts && !failed ? (
               <MapCanvas
                 ref={canvasRef}

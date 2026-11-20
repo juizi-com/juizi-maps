@@ -702,6 +702,13 @@
     max-height: 360px;
   }
 
+  // The wrapper reserves the map's height inline (no jump while it loads);
+  // a min-height beats a max-height, so it has to shrink with the map here,
+  // or a 120px empty band shows under the map on phones.
+  .jmap__map {
+    min-height: min(var(--jmap-height, 360px), 360px) !important;
+  }
+
   .jmap--single .jmap__main {
     grid-template-columns: 1fr;
   }
