@@ -268,6 +268,9 @@ turquoise is 10.2:1. Turquoise stays for the top line and toggles.
 8. JET's banner text is collective.volto.gdprcookie's default (it mentions
    profiling cookies, reCAPTCHA and Meta, and a "Cookie Policy" that isn't
    a link). It needs JET's own wording and policy link in Site Setup.
-   Also: volto-google-analytics loads Google Analytics whatever the banner
-   says, on JET as on ACQF, so the "Google Analytics" toggle does nothing
-   yet.
+   Also: JET's footer (its Footer.jsx customisation) starts Google
+   Analytics with `useGoogleAnalytics()`, which defaults to "cookies
+   allowed", so GA loads whatever the banner says and the "Google
+   Analytics" toggle does nothing yet. (ACQF has that call commented out.)
+   Passing the banner's consent in is a one-line change in JET's footer;
+   not done, since it changes what JET tracks.
