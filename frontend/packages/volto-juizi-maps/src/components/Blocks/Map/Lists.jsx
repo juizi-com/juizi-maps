@@ -115,7 +115,7 @@ export const PlaceList = ({ places, hidden, canShow, onShow }) => {
   );
   return (
     <div className={`jmap__list${hidden ? ' jmap-sr-only' : ''}`}>
-      <h3 className="jmap__list-title">
+      <h3 className="jmap__list-title" data-no-toc="">
         {intl.formatMessage(messages.allPlaces)}
       </h3>
       <ul
@@ -321,7 +321,7 @@ export const ContactCards = ({
   const single = places.length === 1;
   return (
     <div className="jmap__offices">
-      <h3 className="jmap-sr-only">
+      <h3 className="jmap-sr-only" data-no-toc="">
         {intl.formatMessage(messages.contactDetails)}
       </h3>
       {places.map((p) => (

@@ -109,6 +109,13 @@ map's place holds a note with buttons to allow it; the list or contact
 cards show as usual. Editors always see the map. Rules in `consent.js`;
 sites without the banner are unaffected.
 
+## Contents buttons
+
+The list's headings ("All places", and the contact cards' screen-reader
+heading) carry `data-no-toc`, so a Juizi Hero's "Buttons to each heading
+on this page" doesn't make buttons for them: they belong to the map, not
+to the page's sections.
+
 ## Saved data
 
 ```json
