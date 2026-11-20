@@ -496,8 +496,12 @@ export default class MapController {
       (bb, p) => bb.extend(p),
       new this.ml.LngLatBounds(pts[0], pts[0]),
     );
-    // A contact map can go down to the street; project maps stop higher.
-    const closest = this.opts.displayMode === 'contact' ? 15 : 6;
+    // A contact map can go down to the street. A project map with one
+    // place stays at country level, for context; with several, it zooms in
+    // until they separate (20 schools in one township would otherwise sit
+    // in a single group), never past the block's "Closest zoom".
+    let closest = 15;
+    if (this.opts.displayMode !== 'contact') closest = pts.length > 1 ? 12 : 6;
     const padding = Math.min(60, (this.container.clientHeight || 300) / 5);
     this.map.fitBounds(b, {
       padding,
