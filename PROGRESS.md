@@ -7,7 +7,7 @@ juizi-blocks clone, p24) in `~/notes/juizi-maps/JET-CHANGES.md`.
 ## 2026-11-19 (overnight build, DECISIONS.md M0)
 
 Done:
-- [x] Repo (local git only, branch main) in cookieplone two-part layout.
+- [x] Repo (branch main) in cookieplone two-part layout.
 - [x] Backend: settings record + `@juizi-maps-settings`, hidden until
       installed, uninstall profile, example pages profile. 20 tests pass.
 - [x] Frontend: Map block (4 styles), location picker, place names in the
@@ -54,7 +54,9 @@ Next (after the morning review):
 - [ ] Answers to the open questions at the end of DECISIONS.md
 - [ ] First-time editor test by a person (the block README's happy path
       is a draft)
-- [ ] GitHub repo, CI, then mx.ini/mrs-developer sources for JET and p24
+- [x] GitHub repo: juizi-com/juizi-maps (private), 2026-11-20; README
+      with installation, dependencies and where it comes from
+- [ ] CI, then mx.ini/mrs-developer sources for JET and p24
 - [ ] juizi-blocks side as its own branch + PR from main (plus D11: the
       backend validator accepting `juiziMap` colour narrowing)
 - [ ] Screen reader test by a person (NVDA, VoiceOver); heading level
