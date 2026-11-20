@@ -14,6 +14,10 @@ Status: alpha (1.0.0a0), first built November 2026. Where the work stands:
 [PROGRESS.md](PROGRESS.md); every design decision and why:
 [DECISIONS.md](DECISIONS.md).
 
+![A Map block in the "Pins with totals" style: project pins across Africa and beyond, grouped pins coloured by size, Egypt's pop-up open listing its project, the key under the map and the list of all places](docs/map-pins-with-totals.png)
+
+*Pins with totals, on plain Volto: nearby pins group and add up, groups are coloured by size (key under the map), a pop-up lists a place's projects, and every place is also in the list below.*
+
 ## Where it comes from
 
 Two existing blocks showed what Juizi sites needed from a map, and what
