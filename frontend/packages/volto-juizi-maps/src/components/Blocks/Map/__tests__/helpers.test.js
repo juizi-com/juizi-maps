@@ -250,3 +250,22 @@ describe('sharedLabel and sumNumbers', () => {
     expect(sumNumbers([p(30), p(34), { number: null }])).toBe(64);
   });
 });
+
+describe('labelColours', () => {
+  const { labelColours, contrast } = require('../engine/colour');
+  it('always gives at least 4.5:1 text', () => {
+    ['#00958e', '#d9822b', '#ffffff', '#111111', '#d2232a', '#7fd6cf'].forEach(
+      (c) => {
+        const { fill, text } = labelColours(c);
+        expect(contrast(fill, text)).toBeGreaterThanOrEqual(4.5);
+      },
+    );
+  });
+  it('keeps colours that already work', () => {
+    expect(labelColours('#074946')).toEqual({
+      fill: '#074946',
+      text: '#ffffff',
+    });
+    expect(labelColours('#d9822b').fill).toBe('#d9822b');
+  });
+});

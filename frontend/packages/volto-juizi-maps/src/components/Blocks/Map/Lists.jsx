@@ -8,6 +8,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import messages from './messages';
+import { labelColours } from './engine/colour';
 import {
   directionsHref,
   formatNumber as fmt,
@@ -62,7 +63,7 @@ export const GroupKey = ({ colours, breaks, unit }) => {
     <span className="jmap__key" key={text}>
       <span
         className="jmap__dot"
-        style={{ background: c }}
+        style={{ background: labelColours(c).fill }}
         aria-hidden="true"
       />
       <span>{text}</span>

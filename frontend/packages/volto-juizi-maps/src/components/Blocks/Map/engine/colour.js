@@ -88,6 +88,24 @@ export const contrast = (a, b) => {
 export const INK = '#1d232b';
 
 /**
+ * Fill and text colours for anything with text on a colour (pin numbers,
+ * group badges, a pop-up's coloured top): white or dark text, whichever
+ * reads better, and if neither reaches WCAG AA for small text (4.5:1),
+ * the fill is darkened until white text does. JET's turquoise #00958e is
+ * one of those: 3.7:1 with white, 4.3:1 with dark text.
+ */
+export const labelColours = (c) => {
+  const onWhite = contrast(c, '#ffffff');
+  const onInk = contrast(c, INK);
+  if (Math.max(onWhite, onInk) >= 4.5)
+    return { fill: c, text: onWhite >= onInk ? '#ffffff' : INK };
+  let fill = c;
+  for (let i = 1; i <= 20 && contrast(fill, '#ffffff') < 4.5; i += 1)
+    fill = mix(c, '#000000', i * 0.04);
+  return { fill, text: '#ffffff' };
+};
+
+/**
  * The map's own colours for a tone, worked out from the site's main colour
  * (the first colour in the list). `light` keeps the land white, `tinted`
  * washes it with the main colour, `dark` uses a deep version of it.

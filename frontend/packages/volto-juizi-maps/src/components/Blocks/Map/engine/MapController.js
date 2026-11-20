@@ -26,7 +26,7 @@
  *   onNavigate(href)   follow an internal link without reloading the page
  *   onSelect(id|null)  a place's pop-up opened or closed
  */
-import { contrast, INK, isDark, mix, toneColours } from './colour';
+import { contrast, labelColours, mix, toneColours } from './colour';
 import {
   commonLabel,
   directionsHref,
@@ -526,9 +526,12 @@ export default class MapController {
   /* ---------- Pins and groups ---------- */
 
   pinElement(p) {
-    const c = this.opts.pinColour;
     const { pinShape } = this.opts;
     const totals = this.totals;
+    // Pins with text (numbers, place labels) get readable colours.
+    const withText = totals || pinShape === 'badge';
+    const lc = labelColours(this.opts.pinColour);
+    const c = withText ? lc.fill : this.opts.pinColour;
     const n = p.number || 0;
     const { strings } = this.opts;
     const label =
@@ -572,11 +575,9 @@ export default class MapController {
         b.append(el('span', { class: 'jmap-pin__label', text: p.place }));
       }
     }
-    if (!isDark(c)) {
-      b.querySelectorAll('.jmap-pin__label,.jmap-pin__unit').forEach((s) => {
-        s.style.color = INK;
-      });
-    }
+    b.querySelectorAll('.jmap-pin__label,.jmap-pin__unit').forEach((s) => {
+      s.style.color = lc.text;
+    });
     return b;
   }
 
@@ -597,7 +598,8 @@ export default class MapController {
     const totals = this.totals;
     const value = totals ? props.total : props.point_count;
     const breaks = groupBreaks(this.shown, totals);
-    const c = this.groupColours()[groupTier(value, breaks)];
+    const lc = labelColours(this.groupColours()[groupTier(value, breaks)]);
+    const c = lc.fill;
     const size = Math.round(44 + Math.sqrt(value) * (totals ? 3 : 5));
     const label = totals
       ? strings.groupTotal(props.point_count, fmt(props.total))
@@ -624,11 +626,9 @@ export default class MapController {
       );
     }
     b.append(inner);
-    if (!isDark(c)) {
-      b.querySelectorAll('.jmap-pin__label,.jmap-pin__sub').forEach((s) => {
-        s.style.color = INK;
-      });
-    }
+    b.querySelectorAll('.jmap-pin__label,.jmap-pin__sub').forEach((s) => {
+      s.style.color = lc.text;
+    });
     return b;
   }
 
@@ -674,6 +674,13 @@ export default class MapController {
               anchor: pinShape === 'pin' ? 'bottom' : 'center',
             }).setLngLat([place.lng, place.lat]);
           }
+          // MapLibre makes its marker element a focusable "Map marker"
+          // around our own button (two tab stops, nested controls for
+          // screen readers); our button is the one control.
+          const w = m.getElement();
+          ['role', 'tabindex', 'aria-label'].forEach((x) =>
+            w.removeAttribute(x),
+          );
           this.markerCache[key] = m;
         }
         next[key] = m;
@@ -843,12 +850,12 @@ export default class MapController {
       wrap.append(el('img', { class: 'jmap-pop__img', src: p.image, alt: '' }));
     const body = el('div', { class: 'jmap-pop__body' });
     if (popupStyle === 'band') {
-      const ink = isDark(pinColour) ? '#ffffff' : INK;
+      const { fill, text: ink } = labelColours(pinColour);
       const head = el(
         'div',
         {
           class: 'jmap-pop__head',
-          style: `background:${pinColour};color:${ink}`,
+          style: `background:${fill};color:${ink}`,
         },
         heading(),
       );
