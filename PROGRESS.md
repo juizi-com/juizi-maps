@@ -47,6 +47,8 @@ Done:
 - [x] List under the map stacks for long lines (D40); "Show the total on
       the map" (D41), on for JET's cost-effective-analysis map, where
       Uthukela also got its missing "primary schools". 44 unit tests.
+- [x] Phone gutter on VLT pages (D42); accessibility pass with axe and
+      the keyboard (D43): no serious findings left. 46 unit tests.
 
 Next (after the morning review):
 - [ ] Answers to the open questions at the end of DECISIONS.md
@@ -55,8 +57,8 @@ Next (after the morning review):
 - [ ] GitHub repo, CI, then mx.ini/mrs-developer sources for JET and p24
 - [ ] juizi-blocks side as its own branch + PR from main (plus D11: the
       backend validator accepting `juiziMap` colour narrowing)
-- [ ] Keyboard pass on the map (pins are buttons; pop-ups trap focus?)
-      and an axe run; not done yet
+- [ ] Screen reader test by a person (NVDA, VoiceOver); heading level
+      setting for "All places" (D43)
 - [ ] Italian translations (the add-on has en only)
 - [ ] Rebuild JET's live maps by hand once happy (15 mapLibreBlock maps
       on jet2026, listed in JET-CHANGES.md)

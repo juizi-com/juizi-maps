@@ -287,6 +287,30 @@ later differ, the card hides and editors get a hint. Turned on for JET's
 cost-effective-analysis map; also qualifies: jala-peo, Anglo American,
 vvob-egri, Our work (/work).
 
+**D42. VLT pages give the map the text width and a 20px phone gutter.**
+VLT sets each of its own block types to the text width with a gutter on
+small screens; unknown blocks get the full layout width and none, so JET's
+maps touched the phone's edges. Scoped to `#page-document
+.blocks-group-wrapper` (VLT only); plain Volto's container already has a
+14px gutter. Block model 3 isn't handled yet (the framework draws the
+containers there).
+
+**D43. Accessibility pass (axe-core 4.10 + keyboard), 2026-11-20.**
+- Text on pins, group badges and the coloured pop-up top always reaches
+  4.5:1 (`labelColours`): white or dark text, whichever reads better, and
+  if neither does, the fill darkens until white does. JET's turquoise
+  number pins are now a slightly darker turquoise (#00837d); legend
+  swatches match.
+- MapLibre's marker wrapper was a second focusable "Map marker" button
+  around ours (two tab stops, nested controls); its role, tabindex and
+  label are removed after `addTo` (which sets them).
+- Pop-ups are dialogs named after their heading, close with Escape, and
+  give focus back to the pin, list button or card that opened them.
+- Left: axe's "heading order" (moderate) where the page has no h2 before
+  the block's h3 "All places" (the vanilla examples; JET's pages have one).
+  A heading-level setting would fix it. Not tested with a real screen
+  reader (NVDA/VoiceOver): needs a person.
+
 ## Open questions for the morning
 
 1. D10: one place or two for the map settings when juizi-blocks is there?
