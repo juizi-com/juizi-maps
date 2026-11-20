@@ -59,8 +59,11 @@ sidebar says it's the only one.
    countries or provinces that have places, Map height.
 4. **Pins and pop-ups**: Pin shape (Pin / Dot / Label), Pin colour, Group
    pins that are close together, Group colours (shades of the pin colour /
-   the site's colours), Pop-up style (card / card with a coloured top /
-   small label), Items shown before "Show all".
+   the site's colours), **Show the total on the map** (pins with totals
+   and shaded regions, offered only when every place counts the same
+   thing: "1 project" and "3 projects" count as the same), Pop-up style
+   (card / card with a coloured top / small label), Items shown before
+   "Show all".
 5. **For visitors**: List of places under the map (show it / only for
    screen readers), On phones (show the map / hide it and show the list
    or the contact cards), Closest zoom for visitors.
@@ -74,9 +77,16 @@ on).
 
 - The map, with zoom buttons, full screen, and Ctrl/⌘ + scroll to zoom
   (two fingers on touch) so the page still scrolls past it.
+- Optionally, one total in the top-left corner ("160 primary schools
+  across 5 places"); the pins then show just their numbers, and fitting
+  the places leaves room under it. If the places stop counting the same
+  thing, the total disappears and editors get a hint saying why.
 - A key: group colours with their size bands, or the shading range.
 - The list of places (sorted by number, then name), each a button that
   opens its pop-up; screen readers also get each pop-up's content there.
+  When any place's name and count together pass 30 characters, every
+  count goes under its name (same layout for all items); otherwise they
+  sit side by side.
 - Contact maps: a card per place with schema.org markup, "Get directions"
   (Google Maps or OpenStreetMap, set per site), and "Show on the map".
   One place: card beside the map.

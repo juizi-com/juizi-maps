@@ -163,12 +163,14 @@ export const stackList = (places) =>
 export const sharedLabel = (places) => {
   const counted = places.filter((p) => p.number != null);
   if (!counted.length) return null;
+  // "1 project" and "3 projects" count the same thing.
+  const key = (l) => l.toLowerCase().replace(/s$/, '');
   const labels = counted.map((p) => (p.numberLabel || '').trim());
-  const first = labels[0];
-  if (!first) return null;
-  return labels.every((l) => l.toLowerCase() === first.toLowerCase())
-    ? first
-    : null;
+  if (!labels[0] || !labels.every((l) => l && key(l) === key(labels[0])))
+    return null;
+  // The total is more than one, so it takes a plural label if there is one.
+  const plural = counted.find((p) => Number(p.number) !== 1);
+  return (plural ? plural.numberLabel : labels[0]).trim();
 };
 
 export const sumNumbers = (places) =>

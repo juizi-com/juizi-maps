@@ -270,6 +270,23 @@ applies. Editors always get the map. The sidebar's location picker isn't
 gated (editors only). On JET I added a **Maps** choice to the banner's
 optional cookies (backup of the settings in ~/notes/juizi-maps).
 
+**D40. The list stacks when a line is long.** The user asked for a
+length test with a column layout. It measures name and count together
+(longer than 30 characters), since a short name with a long count has the
+same problem, and it switches every item, so the list stays even. Names
+now break only between words (JET's theme broke them anywhere).
+
+**D41. "Show the total on the map"** (the user's idea, 2026-11-20). Off by
+default, so saved maps don't change. Offered for pins with totals and
+shaded regions, only when every counted place has the same "What it
+counts" (case, spaces and a final "s" ignored, so "1 project" and "3
+projects" match; the total uses the plural). Top-left card: total, label,
+"across N places". Pins then drop the repeated label. Fitting the places
+pads the top by the card's height, so no pin opens under it. If the labels
+later differ, the card hides and editors get a hint. Turned on for JET's
+cost-effective-analysis map; also qualifies: jala-peo, Anglo American,
+vvob-egri, Our work (/work).
+
 ## Open questions for the morning
 
 1. D10: one place or two for the map settings when juizi-blocks is there?

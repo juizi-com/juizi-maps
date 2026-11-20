@@ -44,6 +44,9 @@ Done:
       before consent, Only necessary keeps it off, Enable Maps cookies and
       Accept all show it without a reload, it stays after reloading;
       vanilla site unchanged. 38 unit tests.
+- [x] List under the map stacks for long lines (D40); "Show the total on
+      the map" (D41), on for JET's cost-effective-analysis map, where
+      Uthukela also got its missing "primary schools". 44 unit tests.
 
 Next (after the morning review):
 - [ ] Answers to the open questions at the end of DECISIONS.md

@@ -238,6 +238,9 @@ describe('sharedLabel and sumNumbers', () => {
     ).toBe('primary schools');
     expect(sharedLabel([p(30, 'schools'), { number: null }])).toBe('schools');
   });
+  it('treats singular and plural as the same, and returns the plural', () => {
+    expect(sharedLabel([p(1, 'project'), p(3, 'projects')])).toBe('projects');
+  });
   it('is null when labels differ or one is missing', () => {
     expect(sharedLabel([p(30, 'schools'), p(4, 'teachers')])).toBe(null);
     expect(sharedLabel([p(30, 'schools'), p(4)])).toBe(null);
