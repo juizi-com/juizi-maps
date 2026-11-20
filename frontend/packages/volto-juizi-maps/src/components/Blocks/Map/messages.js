@@ -376,6 +376,32 @@ export default defineMessages({
   email: { id: 'juiziMap.emailLabel', defaultMessage: 'Email' },
   hours: { id: 'juiziMap.hoursLabel', defaultMessage: 'Open' },
   close: { id: 'juiziMap.close', defaultMessage: 'Close' },
+  consentChoice: {
+    id: 'juiziMap.consentChoice',
+    defaultMessage:
+      'To view the map, please accept {title} cookies. The places are listed below.',
+  },
+  consentAny: {
+    id: 'juiziMap.consentAny',
+    defaultMessage:
+      'The map comes from another website (OpenFreeMap), so it waits for your cookie choice. The places are listed below.',
+  },
+  consentActions: {
+    id: 'juiziMap.consentActions',
+    defaultMessage: '{allow}, or {manage}.',
+  },
+  consentAllowChoice: {
+    id: 'juiziMap.consentAllowChoice',
+    defaultMessage: 'Enable {title} cookies',
+  },
+  consentAllowOnce: {
+    id: 'juiziMap.consentAllowOnce',
+    defaultMessage: 'Show the map this time',
+  },
+  consentManage: {
+    id: 'juiziMap.consentManage',
+    defaultMessage: 'manage your cookie preferences',
+  },
   mapUnavailable: {
     id: 'juiziMap.mapUnavailable',
     defaultMessage: 'The map couldn’t load. The places are listed below.',

@@ -52,6 +52,27 @@
   text-align: center;
 }
 
+// Waiting for the cookie banner: a note in the map's place. Plain styling
+// for sites without their own; a site's `.volto-gdpr-embed-disabled` rules
+// (the banner's video placeholder) add to it.
+.jmap__consent {
+  max-width: 46ch;
+  margin: 0 16px;
+  line-height: 1.5;
+  text-align: center;
+
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+
 // ---------- Key ----------
 
 .jmap__legend {

@@ -8,7 +8,10 @@
  * - no finished places: a prompt for editors, nothing for visitors;
  * - unfinished places (no name or no location): left out for visitors, and
  *   listed in a hint for editors;
- * - the map fails to load: the list or cards still show, with a note.
+ * - the map fails to load: the list or cards still show, with a note;
+ * - the site's cookie banner hasn't been agreed to (consent.js): no map
+ *   (it would load OpenFreeMap's tiles), a note with buttons to allow it,
+ *   and the list or cards as when it fails.
  */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
@@ -19,6 +22,7 @@ import BlockErrorBoundary from '../_shared/BlockErrorBoundary';
 import EditHint from '../_shared/EditHint';
 import { isEditing } from '../_shared/editMode';
 import MapCanvas from './MapCanvas';
+import useMapConsent from './consent';
 import { ContactCards, GroupKey, Legend, PlaceList, ShadeKey } from './Lists';
 import messages from './messages';
 import { HEIGHTS, STYLES, withDefaults } from './defaults';
@@ -75,6 +79,41 @@ const useStrings = (intl) =>
     [intl],
   );
 
+// Shown instead of the map until the visitor agrees to it in the cookie
+// banner. Also carries the banner's own placeholder class, so a site's
+// styling for blocked videos applies here too.
+const ConsentNote = ({ consent, intl }) => {
+  const { choice, allow, manage } = consent;
+  const button = (key, onClick, text) => (
+    <button key={key} type="button" onClick={onClick}>
+      {text}
+    </button>
+  );
+  return (
+    <div className="jmap__consent volto-gdpr-embed-disabled">
+      {choice
+        ? intl.formatMessage(messages.consentChoice, { title: choice.title })
+        : intl.formatMessage(messages.consentAny)}{' '}
+      {intl.formatMessage(messages.consentActions, {
+        allow: button(
+          'allow',
+          allow,
+          choice
+            ? intl.formatMessage(messages.consentAllowChoice, {
+                title: choice.title,
+              })
+            : intl.formatMessage(messages.consentAllowOnce),
+        ),
+        manage: button(
+          'manage',
+          manage,
+          intl.formatMessage(messages.consentManage),
+        ),
+      })}
+    </div>
+  );
+};
+
 const MapBlock = (props) => {
   const { data } = props;
   const intl = useIntl();
@@ -91,6 +130,10 @@ const MapBlock = (props) => {
   // The shading key's range, from the map (it knows each region's total).
   const [shade, setShade] = useState(null);
   useEffect(() => setMounted(true), []);
+  const consent = useMapConsent({ isEditMode, locale: intl.locale });
+  const blocked = mounted && consent.state === 'blocked';
+  // Without the map (failed or waiting for consent) the list carries it.
+  const noMap = failed || blocked;
 
   const all = useMemo(() => toPlaces(data.places), [data.places]);
   const places = useMemo(() => all.filter((p) => p.ok), [all]);
@@ -219,7 +262,7 @@ const MapBlock = (props) => {
 
   // The colour key, once the colours are known.
   const legendRows = [];
-  if (resolved && !failed) {
+  if (resolved && !noMap) {
     if (mode === 'regions' && shade) {
       legendRows.push(
         <ShadeKey
@@ -278,6 +321,7 @@ const MapBlock = (props) => {
     single ? 'jmap--single' : '',
     d.mobileMap === 'hide' ? 'jmap--nomap-phone' : '',
     failed ? 'jmap--failed' : '',
+    blocked ? 'jmap--consent' : '',
     d.extraClass || '',
   ]
     .filter(Boolean)
@@ -304,7 +348,7 @@ const MapBlock = (props) => {
             className="jmap__map"
             style={{ minHeight: height, '--jmap-height': `${height}px` }}
           >
-            {opts && !failed ? (
+            {opts && !noMap ? (
               <MapCanvas
                 ref={canvasRef}
                 places={places}
@@ -321,12 +365,15 @@ const MapBlock = (props) => {
               <div
                 className="jmap__canvas jmap__canvas--waiting"
                 style={{ height }}
-                aria-hidden="true"
+                aria-hidden={blocked ? undefined : 'true'}
               >
                 {failed && (
                   <p className="jmap__failed">
                     {intl.formatMessage(messages.mapUnavailable)}
                   </p>
+                )}
+                {blocked && !failed && (
+                  <ConsentNote consent={consent} intl={intl} />
                 )}
               </div>
             )}
@@ -335,7 +382,7 @@ const MapBlock = (props) => {
             <ContactCards
               places={places}
               activeId={activeId}
-              canShow={!failed}
+              canShow={!noMap}
               onShow={showPlace}
               directions={settings.directions}
             />
@@ -345,8 +392,8 @@ const MapBlock = (props) => {
         {!contact && (
           <PlaceList
             places={places}
-            hidden={d.listMode === 'hidden' && !failed}
-            canShow={!failed}
+            hidden={d.listMode === 'hidden' && !noMap}
+            canShow={!noMap}
             onShow={showPlace}
           />
         )}
